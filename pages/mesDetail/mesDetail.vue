@@ -2,15 +2,18 @@
 	<view>
 		<view>
 			<ul class="nav">
-				<li>
-					<view class="title" >评论消息</view> 
+				<li :class="{'active':cur == 1}" @click="cli(1)">
+					<view >评论消息</view> 
 				</li>
-				<li class="nav-item" >
-					<view class="title" >点赞消息</view> 
+				<li :class="{'active':cur == 2}" @click="cli(2)">
+					<view>点赞消息</view> 
 				</li> 
-				<li class="nav-item" >
-					<view class="title" >系统消息</view> <!---->
+				<li :class="{'active':cur == 3}" @click="cli(3)">
+					<view>聊天消息</view>
 				</li> 
+				<li :class="{'active':cur == 4}" @click="cli(4)">
+					<view>系统消息</view>
+				</li>
 			</ul>
 		</view>
 	</view>
@@ -21,6 +24,7 @@
 		data() {
 			return {
 				id: 0,
+				cur: 1,
 			}
 		},
 		onLoad(e) {
@@ -30,6 +34,9 @@
 		},
 		
 		methods: {
+			cli(id) {
+				this.cur = id;
+			},
 			sub() {
 				this.$goEasy.subscribe({
 				            channel: this.id,
@@ -50,46 +57,29 @@
 </script>
 
 <style>
-	.nav {
-		display: flex;
-		max-width: 960px;
-		height: 100%;
-		margin: auto;
-		display: flex;
-		align-items: center;
-		line-height: 1;
-	}
-	ul{
-		    list-style-type: disc;
-		    margin-block-start: 1em;
-		    margin-block-end: 1em;
-		    margin-inline-start: 0px;
-		    margin-inline-end: 0px;
-		    padding-inline-start: 40px;
-	}
 	
-	.nav-item.active, .nav-item:hover {
-	    box-shadow: inset 0 -2px currentColor;
+	ul{
+		 display: flex;  
+		 margin: 10rpx 40rpx 10rpx 0rpx;
+		 background: #fff;
 	}
-	.view-nav .nav-list .nav-item {
-	    height: 100%;
-	    align-items: center;
-	    display: flex;
-	    flex-shrink: 0;
-	    font-size: 1.16rem;
-	    color: #71777c;
-	    padding: 0 1rem;
+	.active {
+		height: 100%;
+		color: #00a4ff;
+		border-bottom: 2px solid #00a4ff;
 	}
-	.nav-item {
-	    position: relative;
-	    cursor: pointer;
+	li:hover {
+		color: #00a4ff;
+		border-bottom: 2px solid #00a4ff;
 	}
 	li {
-	    list-style: none;
+		background: #fff;
+		line-height: 60rpx;
+		height: 100%;
+		text-align: center;
+		/* margin: auto; */
+		width: 30%;
+		list-style: none;
 	}
-	user agent stylesheet
-	li {
-	    display: list-item;
-	    text-align: -webkit-match-parent;
-	}
+
 </style>

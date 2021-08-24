@@ -6,8 +6,7 @@
 			back-icon-color="#fff" 
 			:background="background" 
 			title="个人中心"
-			:is-back=false
-			title-color="#fff" 
+			:is-back="false" 
 			title-bold	
 			></u-navbar>
 		</view>
@@ -16,11 +15,8 @@
 			<view class="info" >
 				<view class="pic"></view>
 				<u-avatar @click="preview(userInfo.addressUrl)" size="large" :src="userInfo.addressUrl" mode="circle" ></u-avatar>
-				<view @click="userDetail(userInfo.id)" v-if="userInfo != {}" class="user">
+				<view @click="userDetail(userInfo.id)" class="user">
 					{{userInfo.nickName}}
-				</view>
-				<view v-else class="user" @click="login">
-					未登录
 				</view>
 				<view>
 					<u-icon size="35rpx" name="arrow-right" class="right"  ></u-icon>
@@ -43,7 +39,7 @@
 								<u-badge style="margin-right:50rpx;margin-top: 20rpx;" :is-dot="false" type="error" :count="mesNum"></u-badge>
 							</view>
 						</u-cell-item>
-						<u-cell-item icon="file-text-fill" title="我的发布" value="新版本"></u-cell-item>
+						<u-cell-item @click="myPub(userInfo.id)" icon="file-text-fill" title="我的发布" ></u-cell-item>
 				</u-cell-group>
 		 	</view> 
 		 </view>
@@ -81,6 +77,11 @@
 			}, 2000);
 		},
 		methods: {
+			myPub(id) {
+				uni.navigateTo({
+					url: '/pages/myPub/myPub?id=' + id
+				});
+			},
 			sub() {
 				console.log(this.id);
 				console.log("开始订阅");
@@ -134,16 +135,16 @@
 			preview(url) {
 				uni.previewImage({
 					urls: [url],
-            longPressActions: {
-                itemList: ['保存图片', '收藏'],
-                success: function(data) {
-                    console.log('选中了第' + (data.tapIndex + 1) + '个按钮,第' + (data.index + 1) + '张图片');
-                },
-                fail: function(err) {
-                    console.log(err.errMsg);
-                }
-            }
-        });
+					longPressActions: {
+						itemList: ['保存图片', '收藏'],
+						success: function(data) {
+							console.log('选中了第' + (data.tapIndex + 1) + '个按钮,第' + (data.index + 1) + '张图片');
+					},
+						fail: function(err) {
+							console.log(err.errMsg);
+						}
+					}
+				});
 			}
 		},
 		onLoad() {
@@ -156,7 +157,9 @@
 			let token = this.data.token;
 			// #endif
 			this.$store.dispatch("checkToken",token);
-			this.$store.dispatch("getUserInfo",username);
+			if(isExpired == true) {
+				this.$store.dispatch("getUserInfo",username);
+			}
 		},
 		computed: {
 			mesNum() {

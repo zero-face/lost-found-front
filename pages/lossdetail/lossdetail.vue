@@ -30,7 +30,7 @@
 				</view>
 				<view class="cent">
 					<text class="detail-title">丢失时间：</text>
-					<text>{{new Date(detailLoss.lossTime*1000).getFullYear() + "/" + (new Date(detailLoss.lossTime*1000).getMonth() + 1)+ "/" +  new Date(detailLoss.lossTime*1000).getDate() + "/ " + new Date(detailLoss.lossTime*1000).getHours() + ":00"}}</text><br/>
+					<text>{{new Date(detailLoss.lossTime).getFullYear() + "/" + (new Date(detailLoss.lossTime).getMonth() + 1)+ "/" +  new Date(detailLoss.lossTime).getDate() + "/ " + new Date(detailLoss.lossTime).getHours() + ":00"}}</text><br/>
 				</view>
 				<view class="cent">
 					<text class="detail-title">丢失地点：</text>
@@ -81,7 +81,7 @@
 						</view>
 						<!-- //二级评论 -->
 						<view>
-							<view class="type-2" v-for="(it,index) in item.son" :key="idx">
+							<view class="type-2" v-for="(it,idx) in item.son" :key="idx">
 								<view class="image">
 									<image class="image" mode="top rigth" :src="it.addressUrl"/> 
 								</view>

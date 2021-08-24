@@ -81,7 +81,7 @@
 					minute: true,
 					second: false
 				},
-				
+				token:"",
 				fileList: [], //默认的上传图片，无用
 				list: [
 					"失物",
@@ -176,9 +176,19 @@
 			// #ifdef  MP-WEIXIN
 			let token = this.data.token;
 			// #endif
+			if(token == null || token == "undefined") {
+				uni.showToast({title:"未登录"});
+				setTimeout(function() {
+					uni.switchTab({
+						url:"/pages/user/user"
+					})
+				}, 1000);
+			}
 			this.$store.dispatch("checkToken",token);
 			this.$store.dispatch("getUserInfo",username);
 			this.$store.dispatch("getType");
+			
+			
 		},
 		methods: {
 			errorUpload(res, index, lists, name) {
@@ -209,8 +219,15 @@
 			},
 			submit(type,uid,isPub) {
 				this.$refs.uForm.validate(valid => {
-					let token = "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ6ZXJvIiwiZXhwIjoxNjI5NjQ3NDc4LCJpYXQiOjE2Mjk1NjEwNzgsInVzZXJuYW1lIjoiemVybyJ9.TZpkvPLlrxLyAcR4apWpoojcGrTWVVvmSPHHRjY_EFyamQ1Rawd7QWy9toetOMN6QvkZgkwxOdUvV-6KD8XO_8DL927bvAsTrI_HMII7yqz8QLV2kjhZMZQjNY-Tuss4ZyGJYbypX06vwfd6frnw45PxGbAdGiG3plMM7ABzsy8";
+					// #ifdef  H5
+					let token =   "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ6ZXJvIiwiZXhwIjoxNjI5ODc1NjQyLCJpYXQiOjE2Mjk3ODkyNDIsInVzZXJuYW1lIjoiemVybyJ9.Lm_Lo2wIpyN6eyKGwqPeyP341QYLNq9bMmD4s2jKl6dSn46B89TUvn1n1mmrun5kXlt7SFB4CJxBMMDhxlB_XtzwMEmrlaqDg2iklRO6XACIQtCS69jRlGxp-eD-htIxUCgIcmVx8aZcPyV56aSsOm85BIlsdjBOpk3ArG89HsI";
 					localStorage.setItem("token",token);
+					// #endif
+					// #ifdef  MP-WEIXIN
+					let token = this.data.token;
+					this.data.token =  "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ6ZXJvIiwiZXhwIjoxNjI5ODc1NjQyLCJpYXQiOjE2Mjk3ODkyNDIsInVzZXJuYW1lIjoiemVybyJ9.Lm_Lo2wIpyN6eyKGwqPeyP341QYLNq9bMmD4s2jKl6dSn46B89TUvn1n1mmrun5kXlt7SFB4CJxBMMDhxlB_XtzwMEmrlaqDg2iklRO6XACIQtCS69jRlGxp-eD-htIxUCgIcmVx8aZcPyV56aSsOm85BIlsdjBOpk3ArG89HsI";
+					// #endif
+					
 								if (valid) {
 									console.log('验证通过');
 									//发布失物

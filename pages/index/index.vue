@@ -58,7 +58,7 @@
 					<text style="font-size: 30rpx;font-weight: bold;">失物名称：</text>
 			 		<text>{{item.name}}</text><br/>
 					<text style="font-size: 30rpx;font-weight: bold;">丢失时间：：</text>
-			 		<text>{{new Date(item.lossTime*1000).getFullYear() + "/" + (new Date(item.lossTime*1000).getMonth() + 1)+ "/" +  new Date(item.lossTime*1000).getDate() + "/ " + new Date(item.lossTime*1000).getHours() + ":00"}}</text><br/>
+			 		<text>{{new Date(item.lossTime).getFullYear() + "/" + (new Date(item.lossTime).getMonth() + 1)+ "/" +  new Date(item.lossTime).getDate() + "/ " + new Date(item.lossTime).getHours() + ":00"}}</text><br/>
 					<text style="font-size: 30rpx;font-weight: bold;">丢失地点：：</text>
 			 		<text>{{item.address}}</text><br/>
 					<text style="font-size: 30rpx;font-weight: bold;">物品描述：</text>
@@ -85,7 +85,7 @@
 				<text>{{item.name}}</text><br/>
 				<text style="font-size: 30rpx;font-weight: bold;">丢失时间：</text>
 				
-				<text>{{new Date(item.lossTime*1000).getFullYear() + "/" + (new Date(item.lossTime*1000).getMonth() + 1)+ "/" +  new Date(item.lossTime*1000).getDate() + "/ " + new Date(item.lossTime*1000).getHours() + ":00"}}</text><br/>
+				<text>{{new Date(item.lossTime).getFullYear() + "/" + (new Date(item.lossTime).getMonth() + 1)+ "/" +  new Date(item.lossTime).getDate() + "/ " + new Date(item.lossTime).getHours() + ":00"}}</text><br/>
 				<text style="font-size: 30rpx;font-weight: bold;">丢失地点：</text>
 				
 				<text>{{item.address}}</text><br/>
@@ -131,7 +131,7 @@
 								<text>{{it.name}}</text><br/>
 								<text style="font-size: 30rpx;font-weight: bold;">丢失时间：</text>
 								
-								<text>{{new Date(item.lossTime*1000).getFullYear() + "/" + (new Date(item.lossTime*1000).getMonth() + 1)+ "/" +  new Date(item.lossTime*1000).getDate() + "/ " + new Date(item.lossTime*1000).getHours() + ":00"}}</text><br/>
+								<text>{{new Date(it.lossTime).getFullYear() + "/" + (new Date(it.lossTime).getMonth() + 1)+ "/" +  new Date(it.lossTime).getDate() + "/ " + new Date(it.lossTime).getHours() + ":00"}}</text><br/>
 								<text style="font-size: 30rpx;font-weight: bold;">丢失地点：</text>
 								
 								<text>{{it.address.length > 11?it.address:it.address}}</text><br/>
