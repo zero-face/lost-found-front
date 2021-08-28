@@ -13,7 +13,7 @@
 		<view v-if="id!=4">
 			<u-cell-group>
 				
-				<u-cell-item title="">
+				<u-cell-item>
 					<u-input type="text" v-model="input"></u-input>	
 				</u-cell-item>
 				
@@ -21,11 +21,9 @@
 		</view>
 		<view v-else>
 			<u-cell-group>
-				
-				<u-cell-item title="">
+				<u-cell-item>
 					<u-input type="text" v-model="input"></u-input>	
 				</u-cell-item>
-				
 			</u-cell-group>
 			<view>
 				<u-form-item label="请输入验证码:" label-position="top">
@@ -39,7 +37,6 @@
 						<u-button type="primary" @tap="getCode">{{tips}}</u-button>
 					</view>
 				</view>
-				
 			</view>
 		</view>
 	</view>
@@ -120,6 +117,7 @@
 		onLoad(e) {
 			this.id = e.id;
 			this.input = e.text;
+			console.log(e.text);
 		}
 	}
 </script>

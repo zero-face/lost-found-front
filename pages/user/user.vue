@@ -12,12 +12,15 @@
 		</view>
 		<!-- 个人用户信息 -->
 		<view>
-			<view class="info" >
-				<view class="pic"></view>
-				<u-avatar @click="preview(userInfo.addressUrl)" size="large" :src="userInfo.addressUrl" mode="circle" ></u-avatar>
-				<view @click="userDetail(userInfo.id)" class="user">
+			<view class="info">
+				<view class="pic">
+					<u-avatar @click="preview(userInfo.addressUrl)" size="large" :src="userInfo.addressUrl" mode="circle" ></u-avatar>
+				</view>
+					<view @click="login" v-if="isExpired == false" class="user">请重新登录</view>
+				<view v-else @click="userDetail(userInfo.id)" class="user" >
 					{{userInfo.nickName}}
 				</view>
+			
 				<view>
 					<u-icon size="35rpx" name="arrow-right" class="right"  ></u-icon>
 				</view>
@@ -32,17 +35,21 @@
 		 		<view class="text">实名认证</view>
 		 		
 		 	</view>
-		 	<view class="second">
+		 	
+			<view class="second">
 				<u-cell-group>
-						<u-cell-item @click="mess(userInfo.id)" icon="bell-fill" title="消息通知">
-							<view>
-								<u-badge style="margin-right:50rpx;margin-top: 20rpx;" :is-dot="false" type="error" :count="mesNum"></u-badge>
-							</view>
+						<u-cell-item @click="mess(userInfo.id,mesNum)" icon="bell-fill" title="消息通知">
+							
+								<u-badge :is-dot="false" type="error" :count="mesNum"></u-badge>
+							
 						</u-cell-item>
-						<u-cell-item @click="myPub(userInfo.id)" icon="file-text-fill" title="我的发布" ></u-cell-item>
+						<u-cell-item @click="myPub(userInfo.id)" icon="file-text-fill" title="我的发布" >
+							
+						</u-cell-item>
 				</u-cell-group>
 		 	</view> 
 		 </view>
+		
 	</view>
 </template>
 
@@ -53,62 +60,107 @@
 				background: {
 					backgroundImage: 'linear-gradient(45deg, rgb(255, 255, 127), rgb(141, 198, 63))'},
 				text: "用户未登录",
+				user:{},
+				mes: [],
 				id: 0,
-				
 			}
 		},
-		onReady() {
-			
-		},
-		onShow() {
-			//通过token拿名称再拿到用户信息
-			let username = this.$userInfo.getUsername();
-			// #ifdef  H5
-			let token = localStorage.getItem("token");
-			// #endif
-			// #ifdef  MP-WEIXIN
-			let token = this.data.token;
-			// #endif
-			this.$store.dispatch("checkToken",token);
-			this.$store.dispatch("getUserInfo",username);
-			this.id = this.$store.state.userInfo.id;
-			setTimeout(res=> {
-				this.sub();
-			}, 2000);
-		},
 		methods: {
+			sub() {
+				this.$goEasy.subscribe({
+					            channel: this.$store.state.userInfo.id + "",
+					            onMessage: message=>{
+					                console.log("Channel:" + message.channel + " content:" + message.content);
+									this.$store.state.mesNum++;
+									console.log(JSON.parse(message.content).type);
+									if(JSON.parse(message.content).type == '0'){
+										this.$store.state.systemNum ++;
+									} else if(JSON.parse(message.content).type == 1){
+										this.$store.state.contactNum ++;
+										console.log(this.$store.state.contactNum);
+									}
+									else if(JSON.parse(message.content).type == '3'){
+										this.$store.state.commentNum ++;
+									}else if(JSON.parse(message.content).type == '4'){
+										this.$store.state.likeNum ++;
+									}
+									// this.$store.state.adminMes.push(JSON.parse(message.content));
+					            },
+					            onSuccess: function () {
+					                console.log("Subscribe successfully.")
+					            },
+					            onFailed: function () {
+					                console.log("Subscribe successfully.")
+					            }
+				});
+			},
+			//微信登录
+			login() {
+				uni.getUserProfile({
+					desc: "用户登录，填充用户基本信息",
+					lang:"zh_CN",
+					success: res =>{
+						console.log(res);
+						this.user = res.userInfo;
+						uni.login({
+							scopes: "auth_user",
+							success: res => {
+								this.$store.dispatch("login",[res.code,this.user]);
+								this.sub();
+							},
+							fail: res => {
+								console.log(res);
+							}
+						})
+					},
+					fail: res =>{
+						console.log(res);
+					}
+				});
+			},
+			//点击我的发布
 			myPub(id) {
 				uni.navigateTo({
 					url: '/pages/myPub/myPub?id=' + id
 				});
 			},
-			sub() {
-				console.log(this.id);
-				console.log("开始订阅");
-				this.$goEasy.subscribe({
-				            channel: 1,
-				            onMessage: function (message) {
-								this.$store.state.mesNum = this.$store.state.mesNum+1;
-				                console.log("Channel:" + message.channel + " content:" + message.content);
-				            },
-				            onSuccess: function () {
-				                console.log("Subscribe successfully.");
-				            },
-				            onFailed: function () {
-				                console.log("Subscribe successfully.");
-				            }
-				
-				        });
-			},
 			//点击进入消息详情
-			mess(id) {
-				this.$store.state.mesNum=0;
+			mess(id,mesNum) {
+				mesNum = 0;
 				console.log("用户id:"+id);
 				uni.navigateTo({
 					url: "/pages/mesDetail/mesDetail?id=" + id
 				});
 			},
-			
+			detail() {
+				//token
+				let token = uni.getStorageSync('token');
+				let username = this.$userInfo.getUsername();
+				//检验token是否过期
+				if(token == undefined) {
+					this.$store.state.isExpired = false;
+					return;
+				}
+				this.$store.dispatch("checkToken",[token,username]);
+				this.sub();
+			},
+			//订阅消息
+			auditMes() {
+				this.$goEasy.subscribe({
+					channel: this.$store.state.userInfo.id,
+					onMessage: function (message) {
+					    console.log("subChannel:" + message.channel + " content:" + message.content);
+						this.mesNum ++;
+					},
+					onSuccess: function () {
+					    console.log("Subscribe successfully.")
+					},
+					onFailed: function () {
+					    console.log("Subscribe successfully.")
+					}
+				});
+				
+			},
 			//点击实名认证
 			auth(id,isAuth) {
 				if(isAuth == null || id == null) {
@@ -116,10 +168,8 @@
 					return;
 				}
 				uni.navigateTo({url:"/pages/auth/auth?id=" + id + "&isTrue=" + isAuth})
-				
 			},
 			userDetail(id) {
-				
 				if(id !=null) {
 					uni.navigateTo({
 					    url: '../UserDetail/UserDetail?id=' + id
@@ -129,8 +179,6 @@
 						title: "请先登录",icon:"error"
 					});
 				}
-				
-				
 			},
 			preview(url) {
 				uni.previewImage({
@@ -148,18 +196,8 @@
 			}
 		},
 		onLoad() {
-			//通过token拿名称再拿到用户信息
-			let username = this.$userInfo.getUsername();
-			// #ifdef  H5
-			let token = localStorage.getItem("token");
-			// #endif
-			// #ifdef  MP-WEIXIN
-			let token = this.data.token;
-			// #endif
-			this.$store.dispatch("checkToken",token);
-			if(isExpired == true) {
-				this.$store.dispatch("getUserInfo",username);
-			}
+			this.detail();
+			this.auditMes();
 		},
 		computed: {
 			mesNum() {
@@ -171,12 +209,11 @@
 			isExpired() {
 				return this.$store.state.isExpired;
 			}
-			
 		}
 	}
 </script>
 
-<style>
+<style lang="scss">
 	.second {
 		margin-top: 20rpx;
 		background: #fff;
@@ -210,26 +247,30 @@
 	}
 	.info {
 		background: #fff;
-		height: 30%;
+		height: auto;
 		width: 100%;
-		padding: 30rpx 00rpx 30rpx 20rpx;
+		padding: 30rpx 0rpx 30rpx 20rpx;
 		display: flex;
-		flex-direction: row;
-		flex-wrap: wrap;
+		// flex-direction: row;
+		// flex-wrap: wrap;
+		.pic {
+			line-height: 30rpx;
+			width: 20%;
+		}
+		.user {
+			font-size: 30rpx;
+			margin-left: 5rpx;
+			line-height: 130rpx;
+		}
+		.right {
+			float: right;
+			margin-left: 280rpx;
+			width: 20%;
+			line-height: 100rpx;
+			height: 100%;
+		}
 	}
-	.pic{
-		height: 100%;
-	}
-	.user {
-		height: 100%;
-		width: 60%;
-		margin-left: 50rpx;
-		line-height: 130rpx;
-	}
-	.right {
-		line-height: 100rpx;
-		height: 100%;
-	}
+	
 	.renzheng {
 		display: flex;
 		margin-top: 20rpx;

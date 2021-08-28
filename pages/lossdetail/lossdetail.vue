@@ -68,10 +68,7 @@
 									<view class="reply" @click="treply(item.id,item.nickName)">
 										<u-icon name="chat"></u-icon>
 									</view>
-									
 								</view>
-								
-							
 							</view>
 							<view class="likes">
 								<u-icon v-if="likes.isLike==false" @click="like" name="heart" ></u-icon>
@@ -112,7 +109,7 @@
 		<!-- 联系，审核 -->
 		<view class="check">
 			<view class="verify" shape="circle" ripple-bg-color="#ff0000"  :ripple="true" type="error" size="medium" @click="claim(userInfo.id,detailLoss.id)">认领</view>
-			<view @click="getUser(detailLoss.lossUserId)" class="contact" shape="circle" ripple-bg-color="#55aaff"  :ripple="true" type="primary" size="medium">联系拾取人</view>
+			<view @click="getUser(detailLoss.lossUserId,userInfo.id)" class="contact" shape="circle" ripple-bg-color="#55aaff"  :ripple="true" type="primary" size="medium">联系拾取人</view>
 			<view>
 				<input v-model="input" @confirm="submit(detailLoss.id,userInfo.id)" @blur="change" :focus="iscomment" class="comment" type="text" border=true auto-height=true :placeholder="left" trim />
 			</view>
@@ -162,17 +159,22 @@
 				this.$store.dispatch("detailComment",id);
 				//拿到评论数量
 				this.$store.commit("getCommentNum",id);
-				//通过token拿名称再拿到用户信息
 				let username = this.$userInfo.getUsername();
-				this.$store.dispatch("getUserInfo",username);
+				let token = uni.getStorageSync('token');
+				this.$store.dispatch("checkToken",[token,username]);
 			},
 			//联系拾取人
-			getUser(id) {
-				console.log(id);
-				uni.navigateTo({
-					url: "../contact/contact?id=" +id
-				})
-				
+			getUser(id,uid) {
+					if(id == uid) {
+						console.log("自己发布");
+						uni.showToast({
+							title: '不能私聊自己哦'
+						});
+						return ;
+					}
+					uni.navigateTo({
+						url: "../contact/contact?id=" +id + "&uid=" + uid
+					})
 			},
 			//一旦失去焦点
 			change() {
@@ -187,12 +189,10 @@
 				this.fatherId = fid;//点击就获得fatherid保存为全局，方便后面使用
 				//获取username
 				let username = this.$userInfo.getUsername();
-				let token = localStorage.getItem("token");
-				this.$store.dispatch("checkToken",token);
-				if(this.$store.state.isExpired) {
-					this.iscomment = true;
-					this.left= "@" + name  + " ";
-				}
+				let token = uni.getStorageSync("token");
+				this.$store.dispatch("checkToken",[token,username]);
+				this.iscomment = true;
+				this.left= "@" + name  + " ";
 			},
 			//获取输入框中的内容并保存下来
 			oninput(e) {
@@ -245,6 +245,7 @@
 	.comments {
 		// height: ;
 		// position: absolute;
+		// border-top: 1rpx solid black;
 	}
 	.content {
 		height: 1000rpx;
@@ -331,6 +332,7 @@
 	}
 	.detail {
 		height: 350rpx;
+		border-bottom: 1rpx solid black;
 	}
 	
 	.check {

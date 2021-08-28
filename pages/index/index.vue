@@ -175,6 +175,9 @@
 			this.$store.state.lossSearch=[];
 			
 		},
+		onLoad() {
+			this.sub();
+		},
 		computed: {
 			lossSearch(){
 				return this.$store.state.lossSearch;
@@ -192,6 +195,23 @@
 			}
 		},
 		methods: {
+			sub() {
+				this.$goEasy.subscribe({
+					            channel: "admin",
+					            onMessage: message=>{
+					                console.log("Channel:" + message.channel + " content:" + message.content)
+									this.$store.state.mesNum ++;
+									this.$store.state.adminMes.push(message.content);
+					            },
+					            onSuccess: function () {
+					                console.log("Subscribe successfully.")
+					            },
+					            onFailed: function () {
+					                console.log("Subscribe successfully.")
+					            }
+				});
+
+			},
 			searcher(e){
 				console.log(e)
 				this.$store.dispatch("search",e.replace(/(^\s*)|(\s*$)/g, ""));

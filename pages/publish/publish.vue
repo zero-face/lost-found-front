@@ -151,44 +151,22 @@
 				return this.$store.state.isExpired;
 			}
 		},
-		onShow() {
-			/* //通过token拿名称再拿到用户信息
-			let username = this.$userInfo.getUsername();
-			// #ifdef  H5
-			let token = localStorage.getItem("token");
-			// #endif
-			// #ifdef  MP-WEIXIN
-			let token = this.data.token;
-			// #endif
-			this.$store.dispatch("checkToken",token);
-			this.$store.dispatch("getUserInfo",username);
-			this.$store.dispatch("getType"); */
+		onShow() {	
 		},
 		onReady() {
-				this.$refs.uForm.setRules(this.rules);//规范检查
+			this.$refs.uForm.setRules(this.rules);//规范检查
 		},
 		onLoad() {
 			//通过token拿名称再拿到用户信息
+			let token = uni.getStorageSync('token');
 			let username = this.$userInfo.getUsername();
-			// #ifdef  H5
-			let token = localStorage.getItem("token");
-			// #endif
-			// #ifdef  MP-WEIXIN
-			let token = this.data.token;
-			// #endif
-			if(token == null || token == "undefined") {
-				uni.showToast({title:"未登录"});
-				setTimeout(function() {
-					uni.switchTab({
-						url:"/pages/user/user"
-					})
-				}, 1000);
+			//检验token是否过期
+			if(token == undefined) {
+				this.$store.state.isExpired = false;
+				return;
 			}
-			this.$store.dispatch("checkToken",token);
-			this.$store.dispatch("getUserInfo",username);
+			this.$store.dispatch("checkToken",[token,username]);
 			this.$store.dispatch("getType");
-			
-			
 		},
 		methods: {
 			errorUpload(res, index, lists, name) {
@@ -218,17 +196,12 @@
 				this.shows = true;
 			},
 			submit(type,uid,isPub) {
+				console.log("开始验证");
 				this.$refs.uForm.validate(valid => {
-					// #ifdef  H5
-					let token =   "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ6ZXJvIiwiZXhwIjoxNjI5ODc1NjQyLCJpYXQiOjE2Mjk3ODkyNDIsInVzZXJuYW1lIjoiemVybyJ9.Lm_Lo2wIpyN6eyKGwqPeyP341QYLNq9bMmD4s2jKl6dSn46B89TUvn1n1mmrun5kXlt7SFB4CJxBMMDhxlB_XtzwMEmrlaqDg2iklRO6XACIQtCS69jRlGxp-eD-htIxUCgIcmVx8aZcPyV56aSsOm85BIlsdjBOpk3ArG89HsI";
-					localStorage.setItem("token",token);
-					// #endif
-					// #ifdef  MP-WEIXIN
-					let token = this.data.token;
-					this.data.token =  "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ6ZXJvIiwiZXhwIjoxNjI5ODc1NjQyLCJpYXQiOjE2Mjk3ODkyNDIsInVzZXJuYW1lIjoiemVybyJ9.Lm_Lo2wIpyN6eyKGwqPeyP341QYLNq9bMmD4s2jKl6dSn46B89TUvn1n1mmrun5kXlt7SFB4CJxBMMDhxlB_XtzwMEmrlaqDg2iklRO6XACIQtCS69jRlGxp-eD-htIxUCgIcmVx8aZcPyV56aSsOm85BIlsdjBOpk3ArG89HsI";
-					// #endif
-					
-								if (valid) {
+					// let token =  "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjMwMTM0NDE5LCJpYXQiOjE2MzAwNDgwMTksInVzZXJuYW1lIjoidGVzdCJ9.GXBFtS3taovb5U3677zaRxFS52MwDhdSgSGIDhAaJhlo9aOrmyHS1NQI0qCob6gdLIoqDxBzJKQxorQn8qQn83FAymb6Bd-kkEQ-d-Mtd74Yod65qObjKzYfTw6ByB5r7ESEw8Miw9kuUx16mlwHqoLqd2bhTF4PGiRwxzwSiPk";
+					// let token = "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjI5OTc2NTE2LCJpYXQiOjE2Mjk4OTAxMTYsInVzZXJuYW1lIjoidGVzdCJ9.ZuqwO8uqwp_M2Z4Bk8xw66VeKiFh7IyOWhosxKsQfUuEBlYVcl6_dZJ_ika3MK3fl74zycJ_Zsi_1zUBFpv1R-LRKGZ0w3icUfMgBrRYgYkV4VgYa3vMPLi4CIpkf48_WksG91rFUZIeIttSnAuwjevUyJ4t09foTzEH_JjSZd8"
+					// uni.setStorageSync('token',token);
+								if ( valid) {
 									console.log('验证通过');
 									//发布失物
 									if(this.current == "0") {

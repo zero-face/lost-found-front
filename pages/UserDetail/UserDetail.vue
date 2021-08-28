@@ -3,11 +3,11 @@
 		<view>
 			<u-cell-group title="基本信息" >
 					<u-cell-item title="头像" @click="update(1)">
-						<image style="width: 150rpx; height: 100rpx; background-color: #eeeeee;" mode="aspectFill" :src="userInfo.addressUrl"></image>
+						<image style="width: 150rpx; height: 100rpx; background-color: #eeeeee;" mode="aspectFill" :src="userInfo.addressUrl || ''"></image>
 					</u-cell-item>
-					<u-cell-item @click="update(2,userInfo.nickName)" title="昵称" :value="userInfo.nickName"></u-cell-item>
-					<u-cell-item @click="update(3,userInfo.sex)" title="性别" :value="userInfo.sex"></u-cell-item>
-					<u-cell-item @click="update(4,userInfo.qq)" title="qq" :value="userInfo.qq"></u-cell-item>
+					<u-cell-item @click="update(2,userInfo.nickName)" title="昵称" :value="userInfo.nickName || ''"></u-cell-item>
+					<u-cell-item @click="update(3,((userInfo.sex==1 || userInfo.sex=='男')?'男': '女'))" title="性别" :value="((userInfo.sex==1 || userInfo.sex=='男')?'男': '女') || ''"></u-cell-item>
+					<u-cell-item @click="update(4,userInfo.qq)" title="qq" :value="userInfo.qq || ''"></u-cell-item>
 			</u-cell-group>
 			<view v-if="userInfo.isTrue == true">
 				<u-cell-group title="实名信息">
@@ -43,15 +43,12 @@
 		onPullDownRefresh() {
 			//通过token拿名称再拿到用户信息
 			let username = this.$userInfo.getUsername();
-			// #ifdef  H5
-			let token = localStorage.getItem("token");
-			// #endif
-			// #ifdef  MP-WEIXIN
-			let token = this.data.token;
-			// #endif
-			this.$store.dispatch("checkToken",token);
-			
-			this.$store.dispatch("getUserInfo",username);
+			let token = uni.getStorageSync("token");
+			if(token == undefined) {
+				uni.showToast({titile:"登录过期"});
+				return ;
+			}
+			this.$store.dispatch("checkToken",[token,username]);
 			setTimeout(function() {
 				uni.stopPullDownRefresh();
 			}, 1000);
@@ -83,6 +80,9 @@
 		methods: {
 			//更改基本信息
 			update(id,text) {
+				if(text == null) {
+					text = "";
+				}
 				if(id !=1) {
 					uni.navigateTo({
 						url: "../userUpdate/userUpdate?id=" + id + "&text=" +text,
@@ -91,17 +91,13 @@
 				
 			},
 			updateUserInfo() {
-				//通过token拿名称再拿到用户信息
 				let username = this.$userInfo.getUsername();
-				// #ifdef  H5
-				let token = localStorage.getItem("token");
-				// #endif
-				// #ifdef  MP-WEIXIN
-				let token = this.data.token;
-				// #endif
-				this.$store.dispatch("checkToken",token);
-				this.$store.dispatch("getUserInfo",username);
-				
+				let token = uni.getStorageSync("token");
+				if(token == undefined) {
+					uni.showToast({titile:"登录过期"});
+					return ;
+				}
+				this.$store.dispatch("checkToken",[token,username]);
 			},
 			auth(id) {
 				console.log("实名认证id："+id);
