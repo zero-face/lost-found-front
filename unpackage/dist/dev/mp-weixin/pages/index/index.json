@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "Lost&Found",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "u-image": "/uview-ui/components/u-image/u-image",
+    "u-icon": "/uview-ui/components/u-icon/u-icon",
+    "u-search": "/uview-ui/components/u-search/u-search",
+    "u-empty": "/uview-ui/components/u-empty/u-empty",
+    "u-divider": "/uview-ui/components/u-divider/u-divider"
+  }
+}

@@ -13,6 +13,5 @@ export const getData=(params) => (
 			   reject(res);
 		   }
 		});
-		
 	})
 )

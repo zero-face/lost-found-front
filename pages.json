@@ -1,0 +1,212 @@
+{
+	"easycom": {
+			"^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue"
+		},
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "Lost&Found",
+				"enablePullDownRefresh": false
+			}
+		}
+	    ,{
+            "path" : "pages/foud/foud",
+            "style":                                                                                     
+            {
+                "navigationBarTitleText": "寻物启示",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/user/user",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "个人中心",
+                // "enablePullDownRefresh": true
+				"navigationStyle":"custom"
+            }
+            
+        }
+        ,{
+            "path" : "pages/community/community",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "感谢墙",
+                "enablePullDownRefresh": true
+            }
+            
+        }
+       
+    
+        ,{
+            "path" : "pages/lossdetail/lossdetail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "失物详情",
+                "enablePullDownRefresh": false, 
+				"navigationStyle":"custom"
+            }
+            
+        }
+        ,{
+            "path" : "pages/contact/contact",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle":"custom"
+            }
+            
+        }
+        
+        ,{
+            "path" : "pages/publish/publish",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "信息发布",
+                "enablePullDownRefresh": false,
+				"navigationStyle":"custom"
+            }
+            
+        }
+        ,{
+            "path" : "pages/UserDetail/UserDetail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "个人信息",
+                "enablePullDownRefresh": true,
+				"navigationBarBackgroundColor":"#eee"
+            }
+            
+        }
+        ,{
+            "path" : "pages/auth/auth",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "实名认证",
+                "enablePullDownRefresh": false,
+				"navigationBarBackgroundColor":"#eee"
+            }
+            
+        },
+	/* 	{
+			"path": "uview-ui/components/u-avatar-cropper/u-avatar-cropper",
+			"style": {
+				"navigationBarTitleText": "头像裁剪",
+				"navigationBarBackgroundColor": "#000000"
+			}
+		}, */
+		/* {
+			"path": "uview-ui/components/u-avatar/u-avatar",
+			"style": {
+				"navigationBarTitleText": "图片裁剪",
+				"navigationBarBackgroundColor": "#000000"
+			}
+		} */
+        {
+            "path" : "pages/userUpdate/userUpdate",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "基本信息修改",
+                "enablePullDownRefresh": false,
+				"navigationBarBackgroundColor":"#fff",
+				"navigationStyle":"custom"
+            }
+            
+        }
+        ,{
+            "path" : "pages/mesDetail/mesDetail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "消息中心",
+                "enablePullDownRefresh": false,
+				"navigationStyle":"custom"
+            }
+            
+        }
+        ,{
+            "path" : "pages/myPub/myPub",
+            "style" :                                                          
+            {
+                "navigationBarTitleText": "我的发布",
+                "enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#ffaa7f"
+            }
+            
+        }
+        ,{
+            "path" : "pages/serviceCenter/serviceCenter",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/claimLocation/claimLocation",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle":"custom"
+            }
+            
+        }
+    ],
+	"subpackages": [
+		{
+			"root": "utils",
+			"name": "utils",
+			"pages":[
+				"pages/lossdetail/lossdetail",
+				"pages/mesDetail/mesDetail",
+				"pages/myPub/myPub"
+			],
+			"independent": false
+		}
+	] ,
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "Lost&Found",
+		"navigationBarBackgroundColor": "#55ff7f",
+		"backgroundColor": "#ffffff"
+	},
+	"tabBar": {
+		// "height": "100px",
+	    "color": "#000000",
+	    "selectedColor": "#55aaff",
+	    "borderStyle": "black",
+	    "backgroundColor": "#ffffff",
+	
+	    "list": [{
+	        "pagePath": "pages/index/index",
+	        "iconPath": "./static/loss.png",
+	        "selectedIconPath": "static/loss.png",
+	        "text": "失物"
+	    }, {
+	        "pagePath": "pages/foud/foud",
+	        "iconPath": "static/found.png",
+	        "selectedIconPath": "static/found.png",
+	        "text": "寻物"
+	    }, {
+	        "pagePath": "pages/publish/publish",
+	        "iconPath": "static/add.png",
+	        "selectedIconPath": "static/add.png",
+	        "text": "发布"
+	    }, {
+	        "pagePath": "pages/community/community",
+	        "iconPath": "static/communicate.png",
+	        "selectedIconPath": "static/communicate.png",
+	        "text": "感谢墙"
+	    },{
+	        "pagePath": "pages/user/user",
+	        "iconPath": "static/userInfo.png",
+	        "selectedIconPath": "static/userInfo.png",
+	        "text": "个人中心"
+	    }]
+	}
+	
+}

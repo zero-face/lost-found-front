@@ -1,0 +1,62 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/foud/foud",
+    "pages/user/user",
+    "pages/community/community",
+    "pages/lossdetail/lossdetail",
+    "pages/contact/contact",
+    "pages/publish/publish",
+    "pages/UserDetail/UserDetail",
+    "pages/auth/auth",
+    "pages/userUpdate/userUpdate",
+    "pages/mesDetail/mesDetail",
+    "pages/myPub/myPub"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "Lost&Found",
+    "navigationBarBackgroundColor": "#55ff7f",
+    "backgroundColor": "#ffffff"
+  },
+  "tabBar": {
+    "color": "#000000",
+    "selectedColor": "#55aaff",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "./static/loss.png",
+        "selectedIconPath": "static/loss.png",
+        "text": "失物"
+      },
+      {
+        "pagePath": "pages/foud/foud",
+        "iconPath": "static/found.png",
+        "selectedIconPath": "static/found.png",
+        "text": "寻物"
+      },
+      {
+        "pagePath": "pages/publish/publish",
+        "iconPath": "static/add.png",
+        "selectedIconPath": "static/add.png",
+        "text": "发布"
+      },
+      {
+        "pagePath": "pages/community/community",
+        "iconPath": "static/communicate.png",
+        "selectedIconPath": "static/communicate.png",
+        "text": "感谢墙"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "iconPath": "static/userInfo.png",
+        "selectedIconPath": "static/userInfo.png",
+        "text": "个人中心"
+      }
+    ]
+  },
+  "usingComponents": {}
+}

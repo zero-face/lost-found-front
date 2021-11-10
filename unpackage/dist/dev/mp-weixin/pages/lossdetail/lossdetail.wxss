@@ -1,0 +1,157 @@
+@charset "UTF-8";
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* uni.scss */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+.content {
+  height: 1000rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+}
+.type-1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+}
+.type-1 .image {
+  margin: 3rpx 10rpx 10rpx 3rpx;
+  border-radius: 60%;
+  overflow: hidden;
+  height: 70rpx;
+  width: 70rpx;
+  display: inline-block;
+}
+.type-1 .nacom {
+  width: 580rpx;
+}
+.type-1 .nacom .name {
+  display: inline-block;
+  line-height: 50rpx;
+  text-align: center;
+  color: #838383;
+}
+.type-1 .nacom .comment {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  padding-left: 0rpx;
+  color: #282828;
+}
+.type-1 .nacom .comment .reply {
+  padding-left: 30rpx;
+}
+.type-1 likes {
+  padding-top: 50rpx;
+  width: 400rpx;
+  height: 100%;
+  background: red;
+}
+.type-2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  padding-left: 90rpx;
+  margin-top: 20rpx;
+}
+.type-2 .image {
+  margin: 3rpx 10rpx 10rpx 3rpx;
+  border-radius: 60%;
+  overflow: hidden;
+  height: 70rpx;
+  width: 70rpx;
+  display: inline-block;
+}
+.type-2 .name {
+  margin-right: 450rpx;
+  width: 40rpx;
+  display: inline-block;
+  line-height: 50rpx;
+  text-align: center;
+  color: #838383;
+}
+.type-2 .comment {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  padding-left: 0rpx;
+  color: #282828;
+}
+.type-2 .comment .reply {
+  padding-left: 30rpx;
+}
+.cent {
+  line-height: 50rpx;
+}
+.detail-title {
+  font-size: 30rpx;
+  font-weight: bold;
+}
+.detail {
+  height: 350rpx;
+  border-bottom: 1rpx solid black;
+}
+.check {
+  background: white;
+  position: fixed;
+  right: 15rpx;
+  bottom: 0rpx;
+  left: 0rpx;
+  width: 100%;
+  height: 80rpx;
+  z-index: 999;
+}
+.check .comment {
+  background: white;
+  width: 45%;
+  margin: 0 0 20rpx;
+  height: 80rpx;
+  border: 1rpx solid #b8b8b8;
+  border-radius: 60rpx 60rpx 60rpx 60rpx;
+  line-height: 130rpx;
+  text-align: center;
+}
+.check .contact {
+  background: #ffaa00;
+  border-radius: 40rpx 0% 0% 40rpx;
+  float: right;
+  height: 100%;
+  width: 25%;
+  color: white;
+  line-height: 80rpx;
+  text-align: center;
+}
+.check .verify {
+  color: white;
+  line-height: 80rpx;
+  text-align: center;
+  border-radius: 0% 40rpx 40rpx 0%;
+  width: 130rpx;
+  background: #FF0036;
+  float: right;
+  height: 100%;
+  width: 25%;
+}
+

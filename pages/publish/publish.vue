@@ -71,7 +71,7 @@
 	export default {
 		data() {
 			return {
-				action:"http://localhost:8888/api/v1/lost/upload",
+				action:"http://123.57.220.238:8888/api/v1/lost/upload",
 				pictureUrl: "",
 				params: {
 					year: true,
@@ -195,7 +195,7 @@
 			showTime() {
 				this.shows = true;
 			},
-			submit(type,uid,isPub) {
+			async submit(type,uid,isPub) {
 				console.log("开始验证");
 				this.$refs.uForm.validate(valid => {
 					// let token =  "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjMwMTM0NDE5LCJpYXQiOjE2MzAwNDgwMTksInVzZXJuYW1lIjoidGVzdCJ9.GXBFtS3taovb5U3677zaRxFS52MwDhdSgSGIDhAaJhlo9aOrmyHS1NQI0qCob6gdLIoqDxBzJKQxorQn8qQn83FAymb6Bd-kkEQ-d-Mtd74Yod65qObjKzYfTw6ByB5r7ESEw8Miw9kuUx16mlwHqoLqd2bhTF4PGiRwxzwSiPk";
@@ -207,8 +207,8 @@
 									if(this.current == "0") {
 										if(this.pictureUrl!=null && this.pictureUrl.length > 0) {
 																		
-										this.$store.dispatch("submitLoss",[Date.parse(this.form.time),uid,this.form.name,this.pictureUrl,this.form.address,type,this.form.des]);
-										if(isPub) {
+										this.$store.commit("submitLoss",[Date.parse(this.form.time),uid,this.form.name,this.pictureUrl,this.form.address,type,this.form.des]);
+										if(isPub == true) {
 											this.clear();
 											isPub=false;
 											console.log("发布成功");

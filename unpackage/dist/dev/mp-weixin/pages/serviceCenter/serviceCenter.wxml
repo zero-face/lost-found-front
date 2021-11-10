@@ -1,0 +1,1 @@
+<view><view><u-navbar vue-id="448f436a-1" height="50" is-fixed="{{true}}" title="客服中心" bind:__l="__l"></u-navbar></view></view>

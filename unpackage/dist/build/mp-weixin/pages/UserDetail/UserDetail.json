@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "个人信息",
+  "enablePullDownRefresh": true,
+  "navigationBarBackgroundColor": "#eee",
+  "usingComponents": {
+    "u-cell-group": "/uview-ui/components/u-cell-group/u-cell-group",
+    "u-cell-item": "/uview-ui/components/u-cell-item/u-cell-item"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "navigationBarTitleText": "基本信息修改",
+  "enablePullDownRefresh": false,
+  "navigationBarBackgroundColor": "#fff",
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "u-navbar": "/uview-ui/components/u-navbar/u-navbar",
+    "u-button": "/uview-ui/components/u-button/u-button",
+    "u-cell-group": "/uview-ui/components/u-cell-group/u-cell-group",
+    "u-cell-item": "/uview-ui/components/u-cell-item/u-cell-item",
+    "u-input": "/uview-ui/components/u-input/u-input",
+    "u-form-item": "/uview-ui/components/u-form-item/u-form-item",
+    "u-toast": "/uview-ui/components/u-toast/u-toast",
+    "u-verification-code": "/uview-ui/components/u-verification-code/u-verification-code",
+    "u-message-input": "/uview-ui/components/u-message-input/u-message-input"
+  }
+}

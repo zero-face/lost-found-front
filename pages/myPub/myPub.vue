@@ -115,6 +115,9 @@
 			}
 		},
 		onLoad(e) {
+			// #ifdef  H5
+			uni.setStorageSync("token", "eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjMwNDA2NDA4LCJpYXQiOjE2MzAzMjAwMDgsInVzZXJuYW1lIjoidGVzdCJ9.mAR6SrxHwPOJ-y_fSAyJyNy_49Zvlaw2-XujGMGxe6JphN398fgqNpG5hGL6Tpqac2dX5yxiQSTyL5Ta5rU54mTBmrztWxI7u50i6BT5_RaErSwx1FV5PKjiHr4JSOB_myYYQx1BKCDaotYLQgtgypvqUjhz12Umsf0UxWPeCfw");
+			// #endif
 			this.id = e.id;
 			if(e.id == null || e.id == "undefined") {
 				uni.showToast({title:"未登录"});

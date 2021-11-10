@@ -46,6 +46,12 @@
 						<u-cell-item @click="myPub(userInfo.id)" icon="file-text-fill" title="我的发布" >
 							
 						</u-cell-item>
+						<u-cell-item @click="claim()" icon="coupon-fill" title="领取地点" >
+							
+						</u-cell-item>
+						<u-cell-item @click="serviceCenter()" icon="server-fill" title="客服中心" >
+							
+						</u-cell-item>
 				</u-cell-group>
 		 	</view> 
 		 </view>
@@ -66,6 +72,11 @@
 			}
 		},
 		methods: {
+			claim() {
+				uni.navigateTo({
+					url: '/pages/claimLocation/claimLocation'
+				})
+			},
 			sub() {
 				this.$goEasy.subscribe({
 					            channel: this.$store.state.userInfo.id + "",
@@ -78,8 +89,7 @@
 									} else if(JSON.parse(message.content).type == 1){
 										this.$store.state.contactNum ++;
 										console.log(this.$store.state.contactNum);
-									}
-									else if(JSON.parse(message.content).type == '3'){
+									}else if(JSON.parse(message.content).type == '3'){
 										this.$store.state.commentNum ++;
 									}else if(JSON.parse(message.content).type == '4'){
 										this.$store.state.likeNum ++;
@@ -135,7 +145,7 @@
 			detail() {
 				//token
 				let token = uni.getStorageSync('token');
-				let username = this.$userInfo.getUsername();
+				username = this.$userInfo.getUsername();
 				//检验token是否过期
 				if(token == undefined) {
 					this.$store.state.isExpired = false;

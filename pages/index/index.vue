@@ -115,7 +115,6 @@
 			 <!-- 分类图片 -->
 			 <view class="right">
 				<scroll-view 
-				
 				style="white-space: nowrap; height:800rpx" 
 				scroll-y="true">
 						<view class =type v-for="(it,idx) in typeLoss" :key="idx">
