@@ -3,7 +3,6 @@
     "pages/index/index",
     "pages/foud/foud",
     "pages/user/user",
-    "pages/community/community",
     "pages/lossdetail/lossdetail",
     "pages/contact/contact",
     "pages/publish/publish",
@@ -19,7 +18,7 @@
   "window": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "Lost&Found",
-    "navigationBarBackgroundColor": "#55ff7f",
+    "navigationBarBackgroundColor": "#aaaa7f",
     "backgroundColor": "#ffffff"
   },
   "tabBar": {
@@ -32,25 +31,19 @@
         "pagePath": "pages/index/index",
         "iconPath": "./static/loss.png",
         "selectedIconPath": "static/loss.png",
-        "text": "失物"
+        "text": "失物招领"
       },
       {
         "pagePath": "pages/foud/foud",
         "iconPath": "static/found.png",
         "selectedIconPath": "static/found.png",
-        "text": "寻物"
+        "text": "寻物启示"
       },
       {
         "pagePath": "pages/publish/publish",
         "iconPath": "static/add.png",
         "selectedIconPath": "static/add.png",
-        "text": "发布"
-      },
-      {
-        "pagePath": "pages/community/community",
-        "iconPath": "static/communicate.png",
-        "selectedIconPath": "static/communicate.png",
-        "text": "感谢墙"
+        "text": "信息发布"
       },
       {
         "pagePath": "pages/user/user",
@@ -65,6 +58,5 @@
       "desc": "获取您的当前位置"
     }
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap.json"
+  "usingComponents": {}
 }

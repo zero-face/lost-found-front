@@ -3,8 +3,8 @@
   "enablePullDownRefresh": false,
   "navigationStyle": "custom",
   "usingComponents": {
-    "u-navbar": "/uview-ui/components/u-navbar/u-navbar",
-    "u-badge": "/uview-ui/components/u-badge/u-badge",
-    "u-avatar": "/uview-ui/components/u-avatar/u-avatar"
+    "u-navbar": "/uview-ui_2.0.4/components/u-navbar/u-navbar",
+    "u-badge": "/uview-ui_2.0.4/components/u-badge/u-badge",
+    "u-avatar": "/uview-ui_2.0.4/components/u-avatar/u-avatar"
   }
 }

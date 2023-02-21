@@ -9,9 +9,9 @@
 					<span>我发布了一条失物招领启示 </span>
 					<span class="span" @click="goDetail(item.id)">{{item.name}}</span>
 					
-						<u-image @click="pre(item.pictureUrl)" :fade="true" width="100%"height="80%" mode="aspectFit" :src="item.pictureUrl">
+						<u--image @click="pre(item.pictureUrl)" :fade="true" width="200" height="300" mode="aspectFit" :src="item.pictureUrl">
 							<view slot="error" style="font-size: 24rpx;">没有图片</view>
-						</u-image>
+						</u--image>
 					<view>
 						<view v-if=" Date.parse(new Date()) - item.lossTime / (24 * 3600 * 1000) >= 86400000">
 							{{Math.floor((Date.parse(new Date()) - item.lossTime) / (24 * 3600 * 1000))}}天前
@@ -25,7 +25,6 @@
 						<view v-else>
 							{{Math.floor((Date.parse(new Date()) - item.lossTime) / (24 * 3600 * 1000))}}秒前
 						</view>
-						
 					</view>
 				</view>
 			</view>
@@ -72,10 +71,7 @@
 	export default {
 		data() {
 			return {
-				nav: [
-					{name:"感人事迹"},
-					{name:"寻物启示"}
-				],
+				nav: ["感人事迹","寻物启示"],
 				current: 0,
 				id: 0,
 			}

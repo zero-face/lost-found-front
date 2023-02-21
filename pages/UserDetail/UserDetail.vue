@@ -2,20 +2,20 @@
 	<view>
 		<view>
 			<u-cell-group title="基本信息" >
-					<u-cell-item title="头像" @click="update(1)">
+					<u-cell title="头像" @click="update(1)">
 						<image style="width: 150rpx; height: 100rpx; background-color: #eeeeee;" mode="aspectFill" :src="userInfo.addressUrl || ''"></image>
-					</u-cell-item>
-					<u-cell-item @click="update(2,userInfo.nickName)" title="昵称" :value="userInfo.nickName || ''"></u-cell-item>
-					<u-cell-item @click="update(3,((userInfo.sex==1 || userInfo.sex=='男')?'男': '女'))" title="性别" :value="((userInfo.sex==1 || userInfo.sex=='男')?'男': '女') || ''"></u-cell-item>
-					<u-cell-item @click="update(4,userInfo.qq)" title="qq" :value="userInfo.qq || ''"></u-cell-item>
+					</u-cell>
+					<u-cell @click="update(2,userInfo.nickName)" title="昵称" :value="userInfo.nickName || ''"></u-cell>
+					<u-cell @click="update(3,((userInfo.sex==1 || userInfo.sex=='男')?'男': '女'))" title="性别" :value="((userInfo.sex==1 || userInfo.sex=='男')?'男': '女') || ''"></u-cell>
+					<u-cell @click="update(4,userInfo.qq)" title="qq" :value="userInfo.qq || ''"></u-cell>
 			</u-cell-group>
 			<view v-if="userInfo.isTrue == true">
 				<u-cell-group title="实名信息">
-					<u-cell-item title="真实姓名" :value="userInfo.trueName"></u-cell-item>
-					<u-cell-item title="学号" :value="userInfo.number"></u-cell-item>
-					<u-cell-item title="电话" :value="userInfo.tel"></u-cell-item>
-					<u-cell-item title="学院" :value="userInfo.collage"></u-cell-item>
-					<u-cell-item title="班级" :value="userInfo.clazz"></u-cell-item>
+					<u-cell title="真实姓名" :value="userInfo.trueName"></u-cell>
+					<u-cell title="学号" :value="userInfo.number"></u-cell>
+					<u-cell title="电话" :value="userInfo.tel"></u-cell>
+					<u-cell title="学院" :value="userInfo.collage"></u-cell>
+					<u-cell title="班级" :value="userInfo.clazz"></u-cell>
 				</u-cell-group>
 			</view>
 			<view v-else>
@@ -80,14 +80,14 @@
 		methods: {
 			//更改基本信息
 			update(id,text) {
-				if(text == null) {
-					text = "";
-				}
-				if(id !=1) {
-					uni.navigateTo({
-						url: "../userUpdate/userUpdate?id=" + id + "&text=" +text,
-					});
-				}
+				// if(text == null) {
+				// 	text = "";
+				// }
+				// if(id !=1) {
+				// 	uni.navigateTo({
+				// 		url: "../userUpdate/userUpdate?id=" + id + "&text=" +text,
+				// 	});
+				// }
 				
 			},
 			updateUserInfo() {

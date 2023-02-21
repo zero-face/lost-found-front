@@ -1,16 +1,25 @@
 <template>
 	<view>
 		<view>
-			<u-navbar :custom-back="back" height="50" is-fixed :background="background" :title="chatUserInfo.nickName"></u-navbar>
+			<u-navbar
+				:title="chatUserInfo.nickName"
+				left-text="返回"
+				@leftClick="back"
+				border
+				titleWidth="300"
+				height="50"
+				safeAreaInsetTop
+				:bgColor="background.backgroundColor"
+			>
+			</u-navbar>
+			
 		</view>
 		<view class="content">
 			<view class="message">
 				<scroll-view scroll-y="true" style="white-space: nowrap; height:1200rpx">
 					<view v-for="(item,index) in historyMes" :key="index">
 						<view class="he" v-if="item.froms == id">
-			
 							<u-avatar size="mini" :src="chatUserInfo.addressUrl"></u-avatar>
-							
 							<span>{{item.message}}</span>
 						</view>
 						<view v-else class="my">
@@ -32,8 +41,11 @@
 				</scroll-view>
 			</view>
 			<view class="send">
-				<u-input border=true v-model="val" class="input" style="background: #fff;" type="text" trim  :border="true">
-				</u-input>
+				<view style="height: 100%; width: 70%;"> 
+					<textarea class="input" auto-height placeholder-class="sss" :placeholder="left" auto-height v-model="input" />
+				</view>
+				
+				
 				<view class="text" @click="send(val)">
 					发送
 				</view>
@@ -188,7 +200,7 @@
 <style lang="scss">
 	
 	.content {
-		background: #C0ECF3;
+		background: #eee;
 	}
 	.message {
 		.he{
@@ -233,21 +245,25 @@
 	
 	
 	.send {
-		background: #eee;
+		background: #fff;
 		position: fixed;
-		right: 0rpx; 
-		bottom:0rpx;
+		right: 20rpx; 
+		bottom:10rpx;
 		left: 0rpx;
 		width:100%;
-		height: 80rpx; 
+		height: 70rpx; 
 		z-index:999;
 		display: flex;
+		padding: 20rpx 10rpx 10rpx 10rpx;
 		.input {
-			height: 80rpx;
-			border-radius: 60rpx 60rpx 60rpx 60rpx;
-			width: 80%;
-			margin: 0rpx 20rpx 0rpx 15rpx;
+			width: 100%;
+			min-height: 60rpx; 
+			background-color: #eee;
+			border-radius: 50rpx; 
+			line-height: 70rpx;
 			padding-left: 30rpx;
+			height: 80rpx;
+			max-height: 80rpx;
 		}
 		.text {
 			text-align: center;
@@ -256,7 +272,7 @@
 			width: 20%;
 			height: 90%;
 			margin-top:5rpx;
-			line-height: 80rpx;
+			line-height: 72rpx;
 			border-radius: 50rpx 50rpx 50rpx  50rpx;
 		}
 	}

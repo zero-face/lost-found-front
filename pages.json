@@ -1,6 +1,8 @@
 {
 	"easycom": {
-			"^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue"
+			"^u-(.*)": "@/uview-ui_2.0.4/components/u-$1/u-$1.vue"
+			// "^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue"
+			
 		},
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
@@ -10,16 +12,24 @@
 				"enablePullDownRefresh": false
 			}
 		}
-	    ,{
-            "path" : "pages/foud/foud",
-            "style":                                                                                     
-            {
-                "navigationBarTitleText": "寻物启示",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
+		// ,
+		// {
+		// 	"path" : "pages/community/community",
+		// 	"style" :                                                                                    
+		// 	{
+		// 		"navigationBarTitleText": "感谢墙",
+		// 		"enablePullDownRefresh": true
+		// 	}
+		// }
+		,{
+			"path" : "pages/foud/foud",
+			"style":                                                                                     
+			{
+				"navigationBarTitleText": "寻物启示",
+				"enablePullDownRefresh": false
+			}
+		}
+		,{
             "path" : "pages/user/user",
             "style" :                                                                                    
             {
@@ -29,17 +39,6 @@
             }
             
         }
-        ,{
-            "path" : "pages/community/community",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "感谢墙",
-                "enablePullDownRefresh": true
-            }
-            
-        }
-       
-    
         ,{
             "path" : "pages/lossdetail/lossdetail",
             "style" :                                                                                    
@@ -132,7 +131,7 @@
             {
                 "navigationBarTitleText": "我的发布",
                 "enablePullDownRefresh": false,
-				"navigationBarBackgroundColor": "#ffaa7f"
+				"navigationBarBackgroundColor": "#ffaaff"
             }
             
         }
@@ -156,26 +155,25 @@
             
         }
     ],
-	"subpackages": [
-		{
-			"root": "utils",
-			"name": "utils",
-			"pages":[
-				"pages/lossdetail/lossdetail",
-				"pages/mesDetail/mesDetail",
-				"pages/myPub/myPub"
-			],
-			"independent": false
-		}
-	] ,
+	// "subpackages": [
+	// 	{
+	// 		"root": "utils",
+	// 		"name": "utils",
+	// 		"pages":[
+	// 			"pages/lossdetail/lossdetail",
+	// 			"pages/mesDetail/mesDetail",
+	// 			"pages/myPub/myPub"
+	// 		],
+	// 		"independent": false
+	// 	}
+	// ] ,
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "Lost&Found",
-		"navigationBarBackgroundColor": "#55ff7f",
+		"navigationBarBackgroundColor": "#aaaa7f",
 		"backgroundColor": "#ffffff"
 	},
 	"tabBar": {
-		// "height": "100px",
 	    "color": "#000000",
 	    "selectedColor": "#55aaff",
 	    "borderStyle": "black",
@@ -185,23 +183,27 @@
 	        "pagePath": "pages/index/index",
 	        "iconPath": "./static/loss.png",
 	        "selectedIconPath": "static/loss.png",
-	        "text": "失物"
+	        "text": "失物招领"
 	    }, {
 	        "pagePath": "pages/foud/foud",
 	        "iconPath": "static/found.png",
 	        "selectedIconPath": "static/found.png",
-	        "text": "寻物"
-	    }, {
+	        "text": "寻物启示"
+	    },
+		{
 	        "pagePath": "pages/publish/publish",
 	        "iconPath": "static/add.png",
 	        "selectedIconPath": "static/add.png",
-	        "text": "发布"
-	    }, {
-	        "pagePath": "pages/community/community",
-	        "iconPath": "static/communicate.png",
-	        "selectedIconPath": "static/communicate.png",
-	        "text": "感谢墙"
-	    },{
+	        "text": "信息发布"
+	    },
+		// {
+	 //        "pagePath": "pages/community/community",
+	 //        "iconPath": "static/communicate.png",
+	 //        "selectedIconPath": "static/communicate.png",
+	 //        "text": "感谢墙"
+	 //    },
+	 
+		{
 	        "pagePath": "pages/user/user",
 	        "iconPath": "static/userInfo.png",
 	        "selectedIconPath": "static/userInfo.png",

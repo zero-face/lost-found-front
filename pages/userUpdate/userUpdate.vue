@@ -1,10 +1,20 @@
 <template>
 	<view>
 		<view>
-				<u-navbar @custom-back="back" title-bold back-text="返回" title="基本信息修改">
-					<view>
-						<u-button @click="save(id,code,userInfo.id)" style="margin-left:500rpx" size="mini" type="primary">保存</u-button>
-					</view>
+				<u-navbar
+					title="消息中心"
+					left-text="返回"
+					@leftClick="back"
+					border
+					titleWidth="300"
+					safeAreaInsetTop
+					height="50"
+					:bgColor="background.backgroundImage"
+				>
+				<view>
+					<u-button @click="save(id,code,userInfo.id)" style="margin-left:500rpx" size="mini" type="primary">保存</u-button>
+				</view>
+					
 					
 				</u-navbar>
 				
@@ -13,26 +23,26 @@
 		<view v-if="id!=4">
 			<u-cell-group>
 				
-				<u-cell-item>
+				<u-cell>
 					<u-input type="text" v-model="input"></u-input>	
-				</u-cell-item>
+				</u-cell>
 				
 			</u-cell-group>
 		</view>
 		<view v-else>
 			<u-cell-group>
-				<u-cell-item>
+				<u-cell>
 					<u-input type="text" v-model="input"></u-input>	
-				</u-cell-item>
+				</u-cell>
 			</u-cell-group>
 			<view>
 				<u-form-item label="请输入验证码:" label-position="top">
 					<u-toast ref="uToast"></u-toast>
-						<u-verification-code seconds="60" @end="end" @start="start" ref="uCode" @change="codeChange"></u-verification-code>
+						<u-code seconds="60" @end="end" @start="start" ref="uCode" @change="codeChange"></u-code>
 				</u-form-item>
 				<view> 
 				<!-- 二维码输入框 -->
-					<u-message-input width="40rpx" @finish="finish" :maxlength="6"></u-message-input>
+					<u-code-input width="40rpx" @finish="finish" :maxlength="6"></u-code-input>
 					<view>
 						<u-button type="primary" @tap="getCode">{{tips}}</u-button>
 					</view>

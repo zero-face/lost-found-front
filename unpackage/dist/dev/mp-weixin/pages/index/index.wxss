@@ -25,8 +25,14 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
+.content {
+  width: 100%;
+  height: auto;
+  background-color: #eee;
+}
 .active {
   background-color: white;
+  border-radius: 30rpx 0rpx 0rpx 30rpx;
 }
 .title {
   font-size: 25rpx;
@@ -36,10 +42,8 @@
   text-align: center;
 }
 .ld {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
   display: inline-flex;
-  height: 700rpx;
+  height: 500rpx;
   width: 100%;
 }
 .ld .left {
@@ -47,8 +51,12 @@
   height: 700rpx;
   background-color: #eee;
 }
+.ld .left .title {
+  margin-bottom: 25rpx;
+}
 .ld .right {
   width: 70%;
+  background-color: white;
   border: 1rpx solid "#939393";
 }
 .ld .right .type {
@@ -64,6 +72,47 @@
 .ld .right .type-image {
   height: 100%;
   padding: 20rpx 0 10rpx 2rpx;
+}
+.all-item {
+  width: auto;
+  height: 800rpx;
+  margin: 0rpx 20rpx 0rpx 20rpx;
+  border-radius: 30rpx;
+  border-bottom: 1rpx solid #cecece;
+}
+.all-item .all-img {
+  display: flex;
+  justify-content: center;
+  /* 水平居中 */
+  align-items: center;
+  width: auto;
+  height: 67%;
+  background-color: #fff;
+  border-radius: 30rpx 30rpx 0 0;
+}
+.all-item .all-nav {
+  width: auto;
+  height: 30%;
+  background-color: #fff;
+  padding: 10rpx 10rpx 10rpx 10rpx;
+  border-radius: 0rpx 0rpx 30rpx 30rpx;
+}
+.all-item .all-nav .item {
+  text-align: center;
+  width: 70rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  margin-left: 50rpx;
+}
+.all-item .all-nav .button {
+  color: white;
+  height: 70rpx;
+  line-height: 70rpx;
+  width: 160rpx;
+  background-color: red;
+  text-align: center;
+  margin-left: auto;
+  border-radius: 50rpx;
 }
 .s {
   background: #eee;
@@ -84,6 +133,12 @@
   line-height: 50rpx;
   margin-bottom: 20rpx;
 }
+.search-right .hiden {
+  width: 66%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 .search-left {
   margin-left: 10rpx;
   display: inline-block;
@@ -91,30 +146,21 @@
   width: 30%;
 }
 .nav {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
   background: #253598;
   color: #211d69;
   font-family: sans-serif;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-          justify-content: center;
+  align-items: center;
+  justify-content: center;
   font-weight: 700;
   padding: 60rpx 20rpx 0rpx 20rpx;
   background: #55aaff;
   box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.15);
-  margin: 10rpx 0 10rpx 0;
 }
 ._ul,
 ._li {
   list-style-type: none;
   padding: 0;
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
   margin-bottom: 0;
 }
@@ -122,20 +168,12 @@ u-icon {
   width: 31px;
   height: 20px;
   margin: 0px 5px;
-  -webkit-transition: 0.45s ease-in-out all;
   transition: 0.45s ease-in-out all;
 }
 ._li {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-          flex-direction: column;
+  align-items: center;
+  flex-direction: column;
   text-align: center;
   cursor: pointer;
   min-width: 200rpx;
@@ -156,23 +194,17 @@ u-icon {
           transform: scale(0);
   -webkit-transform-origin: 50% 50%;
           transform-origin: 50% 50%;
-  -webkit-transition: 0.45s ease-in-out all;
   transition: 0.45s ease-in-out all;
 }
 .nav text {
-  -webkit-transition: 0.45s ease-in-out all;
   transition: 0.45s ease-in-out all;
   position: absolute;
   top: 11px;
 }
 .text-container,
 .svg-container {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-          justify-content: center;
+  justify-content: center;
   -webkit-mask-image: url("https://kasperdebruyne.be/img/mask2.svg");
   -webkit-mask-composite: source-out;
   -webkit-mask-position: 0px -14px;
@@ -181,12 +213,10 @@ u-icon {
   position: relative;
   width: 100%;
   height: 20px;
-  -webkit-transition: 0.45s ease-in-out all;
   transition: 0.45s ease-in-out all;
 }
 .text-container {
-  -webkit-transition-delay: 0.1s;
-          transition-delay: 0.1s;
+  transition-delay: 0.1s;
 }
 .svg-container {
   -webkit-mask-size: 100px 60px;
@@ -203,8 +233,7 @@ u-icon {
 ._li:hover:before {
   -webkit-transform: scale(1);
           transform: scale(1);
-  -webkit-transition-delay: 0.15s;
-          transition-delay: 0.15s;
+  transition-delay: 0.15s;
 }
 ._li:hover text {
   -webkit-transform: translateY(-10px);

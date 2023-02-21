@@ -2,7 +2,16 @@
 	<view>
 		<!-- 自定义导航栏 -->
 		<view>
-			<u-navbar back-icon-color="white" title-color="white" title="领取地点" :background="background"></u-navbar>
+			<u-navbar
+				title="领取地点"
+				left-text="返回"
+				@leftClick="back"
+				border
+				titleWidth="300"
+				height="50"
+				bgColor="#f24d6c"
+			>
+			</u-navbar>
 		</view>
 		<!-- 简介 -->
 		<view>
@@ -16,8 +25,6 @@
 			<!-- <u-button>开始导航</u-button> -->
 		</view>
 		<!-- 地图引入 -->
-		<view>
-		</view>
 		<view >
 			<map class="map" show-location show-compass enable-building :polyline="polyline" :markers="marks" :longitude="longitude" :latitude="latitude">
 			</map>
@@ -40,9 +47,6 @@
 					height: 20
 					}
 				],
-				background: {
-					backgroundColor: '#ff0000',
-				},
 				number: "19802980992",
 				polyline: [],
 			}
@@ -101,6 +105,9 @@
 				        console.log(res);
 				      }
 				    });
+			},
+			back() {
+				uni.navigateBack();
 			}
 		},
 		computed: {

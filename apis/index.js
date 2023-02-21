@@ -1,6 +1,8 @@
-const baseUrl = "http://123.57.220.238:8888/api/v1/";
+// const baseUrl = "http://82.157.191.65:8888/api/v1/";
+const baseUrl = "http://test/api/v1/";
+// const baseUrl = "http://localhost:8888/api/v1/";
 export const getData=(params) => (
-	new Promise((resolve,reject) => {
+	new Promise((resolve, reject) => {
 		uni.request({
 		   url: baseUrl + params.url, 
 		   method: params.method || "GET",

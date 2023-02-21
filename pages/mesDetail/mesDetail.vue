@@ -1,15 +1,17 @@
 <template>
 	<view class="content">
 		<view>
-			<u-navbar 
-			back-text="返回" 
-			back-icon-color="#000000" 
-			:background="{ background: '#ffaa7f' }" 
-			title="消息中心"
-			title-color="#000000" 
-			:custom-back="back"
-			title-bold	
-			></u-navbar>
+			<u-navbar
+				title="消息中心"
+				left-text="返回"
+				@leftClick="back"
+				border
+				titleWidth="300"
+				safeAreaInsetTop
+				height="50"
+				:bgColor="background.backgroundImage"
+			>
+			</u-navbar>
 		</view>
 
 		<view>

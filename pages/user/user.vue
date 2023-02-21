@@ -1,28 +1,31 @@
 <template>
 	<view class="content">
 		<!-- 自定义导航栏 -->
-		<view>
+		<view style="background-image: linear-gradient(to bottom , #5bbdfe, #fff);">
 			<u-navbar
-			back-icon-color="#fff" 
-			:background="background" 
-			title="个人中心"
-			:is-back="false" 
-			title-bold	
-			></u-navbar>
+				title="个人中心"
+				border
+				titleWidth="300"
+				safeAreaInsetTop
+				height="50"
+				bgColor="#00aa7f"
+				disLeft="false"
+			>
+			</u-navbar>
 		</view>
 		<!-- 个人用户信息 -->
+		
 		<view>
 			<view class="info">
 				<view class="pic">
-					<u-avatar @click="preview(userInfo.addressUrl)" size="large" :src="userInfo.addressUrl" mode="circle" ></u-avatar>
+					<u-avatar @click="preview(userInfo.addressUrl)" size="50" :src="userInfo.addressUrl" shape="circle" mode="scaleToFit" ></u-avatar>
 				</view>
-					<view @click="login" v-if="isExpired == false" class="user">请重新登录</view>
+				<view @click="login" v-if="isExpired == false" class="user">请重新登录</view>
 				<view v-else @click="userDetail(userInfo.id)" class="user" >
 					{{userInfo.nickName}}
 				</view>
-			
 				<view>
-					<u-icon size="35rpx" name="arrow-right" class="right"  ></u-icon>
+					<u-icon name="arrow-right"></u-icon>
 				</view>
 			</view>
 		</view>
@@ -38,20 +41,20 @@
 		 	
 			<view class="second">
 				<u-cell-group>
-						<u-cell-item @click="mess(userInfo.id,mesNum)" icon="bell-fill" title="消息通知">
+						<u-cell @click="mess(userInfo.id,mesNum)" icon="bell-fill" title="消息通知">
 							
 								<u-badge :is-dot="false" type="error" :count="mesNum"></u-badge>
 							
-						</u-cell-item>
-						<u-cell-item @click="myPub(userInfo.id)" icon="file-text-fill" title="我的发布" >
+						</u-cell>
+						<u-cell @click="myPub(userInfo.id)" icon="file-text-fill" title="我的发布" >
 							
-						</u-cell-item>
-						<u-cell-item @click="claim()" icon="coupon-fill" title="领取地点" >
+						</u-cell>
+						<u-cell @click="claim()" icon="coupon-fill" title="领取地点" >
 							
-						</u-cell-item>
-						<u-cell-item @click="serviceCenter()" icon="server-fill" title="客服中心" >
+						</u-cell>
+						<u-cell @click="serviceCenter()" icon="server-fill" title="客服中心" >
 							
-						</u-cell-item>
+						</u-cell>
 				</u-cell-group>
 		 	</view> 
 		 </view>
@@ -63,8 +66,6 @@
 	export default {
 		data() {
 			return {
-				background: {
-					backgroundImage: 'linear-gradient(45deg, rgb(255, 255, 127), rgb(141, 198, 63))'},
 				text: "用户未登录",
 				user:{},
 				mes: [],
@@ -72,38 +73,17 @@
 			}
 		},
 		methods: {
+			serviceCenter() {
+				uni.navigateTo({
+					url: '/pages/serviceCenter/serviceCenter'
+				})
+			},
 			claim() {
 				uni.navigateTo({
 					url: '/pages/claimLocation/claimLocation'
 				})
 			},
-			sub() {
-				this.$goEasy.subscribe({
-					            channel: this.$store.state.userInfo.id + "",
-					            onMessage: message=>{
-					                console.log("Channel:" + message.channel + " content:" + message.content);
-									this.$store.state.mesNum++;
-									console.log(JSON.parse(message.content).type);
-									if(JSON.parse(message.content).type == '0'){
-										this.$store.state.systemNum ++;
-									} else if(JSON.parse(message.content).type == 1){
-										this.$store.state.contactNum ++;
-										console.log(this.$store.state.contactNum);
-									}else if(JSON.parse(message.content).type == '3'){
-										this.$store.state.commentNum ++;
-									}else if(JSON.parse(message.content).type == '4'){
-										this.$store.state.likeNum ++;
-									}
-									// this.$store.state.adminMes.push(JSON.parse(message.content));
-					            },
-					            onSuccess: function () {
-					                console.log("Subscribe successfully.")
-					            },
-					            onFailed: function () {
-					                console.log("Subscribe successfully.")
-					            }
-				});
-			},
+			
 			//微信登录
 			login() {
 				uni.getUserProfile({
@@ -116,7 +96,6 @@
 							scopes: "auth_user",
 							success: res => {
 								this.$store.dispatch("login",[res.code,this.user]);
-								this.sub();
 							},
 							fail: res => {
 								console.log(res);
@@ -145,32 +124,15 @@
 			detail() {
 				//token
 				let token = uni.getStorageSync('token');
-				username = this.$userInfo.getUsername();
+				let username = this.$userInfo.getUsername();
 				//检验token是否过期
 				if(token == undefined) {
 					this.$store.state.isExpired = false;
 					return;
 				}
 				this.$store.dispatch("checkToken",[token,username]);
-				this.sub();
 			},
-			//订阅消息
-			auditMes() {
-				this.$goEasy.subscribe({
-					channel: this.$store.state.userInfo.id,
-					onMessage: function (message) {
-					    console.log("subChannel:" + message.channel + " content:" + message.content);
-						this.mesNum ++;
-					},
-					onSuccess: function () {
-					    console.log("Subscribe successfully.")
-					},
-					onFailed: function () {
-					    console.log("Subscribe successfully.")
-					}
-				});
-				
-			},
+			
 			//点击实名认证
 			auth(id,isAuth) {
 				if(isAuth == null || id == null) {
@@ -207,7 +169,7 @@
 		},
 		onLoad() {
 			this.detail();
-			this.auditMes();
+			
 		},
 		computed: {
 			mesNum() {
@@ -224,6 +186,10 @@
 </script>
 
 <style lang="scss">
+	.content {
+		background-color: #eee;
+		height: 100vh;
+	}
 	.second {
 		margin-top: 20rpx;
 		background: #fff;
@@ -247,11 +213,7 @@
 		height: 20rpx;
 		width: 30rpx;
 	}
-	
-	.content{
-		height: 92.5vh;
-		background: #eee;
-	}
+
 	.box{
 		background-color: red;
 	}
@@ -261,8 +223,7 @@
 		width: 100%;
 		padding: 30rpx 0rpx 30rpx 20rpx;
 		display: flex;
-		// flex-direction: row;
-		// flex-wrap: wrap;
+		align-items: center;
 		.pic {
 			line-height: 30rpx;
 			width: 20%;
@@ -271,8 +232,10 @@
 			font-size: 30rpx;
 			margin-left: 5rpx;
 			line-height: 130rpx;
+			width: 50%;
 		}
 		.right {
+			margin-left: auto;
 			float: right;
 			margin-left: 280rpx;
 			width: 20%;

@@ -4,30 +4,30 @@
 			<u-form :model="form" ref="uForm" :error-type="errorType">
 			<u-cell-group >
 				<u-form-item prop="name">
-					<u-cell-item title="真实姓名" required>
+					<u-cell title="真实姓名" required>
 						<input :disabled="use" :focus="use" v-model="form.name" type="text" :placeholder="userInfo.trueName"/>
 					
-					</u-cell-item>
+					</u-cell>
 				</u-form-item>
 				<u-form-item prop="number">
-					<u-cell-item title="学号" required>
+					<u-cell title="学号" required>
 						<input :disabled="use" v-model="form.number" type="text" :placeholder="userInfo.number"/>
-					</u-cell-item>
+					</u-cell>
 				</u-form-item>
 				<u-form-item prop="tel">
-					<u-cell-item title="电话" required>
+					<u-cell title="电话" required>
 						<input :disabled="use" v-model="form.tel" type="text" :placeholder="userInfo.tel"/>
-					</u-cell-item>
+					</u-cell>
 				</u-form-item>
 				<u-form-item prop="collage">
-					<u-cell-item title="学院" required>
+					<u-cell title="学院" required>
 						<input :disabled="use" v-model="form.collage" type="text" :placeholder="userInfo.collage"/>
-					</u-cell-item>
+					</u-cell>
 				</u-form-item>
 				<u-form-item prop="clazz">
-					<u-cell-item title="班级" required>
+					<u-cell title="班级" required>
 						<input :disabled="use" v-model="form.clazz" type="text" :placeholder="userInfo.clazz"/>
-					</u-cell-item>
+					</u-cell>
 				</u-form-item>
 			</u-cell-group>
 			</u-form>

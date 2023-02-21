@@ -1,5 +1,11 @@
 {
   "navigationBarTitleText": "寻物启示",
   "enablePullDownRefresh": false,
-  "usingComponents": {}
+  "usingComponents": {
+    "u-search": "/uview-ui_2.0.4/components/u-search/u-search",
+    "u-tabs": "/uview-ui_2.0.4/components/u-tabs/u-tabs",
+    "u-empty": "/uview-ui_2.0.4/components/u-empty/u-empty",
+    "u-gap": "/uview-ui_2.0.4/components/u-gap/u-gap",
+    "u-divider": "/uview-ui_2.0.4/components/u-divider/u-divider"
+  }
 }

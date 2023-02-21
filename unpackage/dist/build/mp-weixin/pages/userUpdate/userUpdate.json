@@ -4,14 +4,14 @@
   "navigationBarBackgroundColor": "#fff",
   "navigationStyle": "custom",
   "usingComponents": {
-    "u-navbar": "/uview-ui/components/u-navbar/u-navbar",
-    "u-button": "/uview-ui/components/u-button/u-button",
-    "u-cell-group": "/uview-ui/components/u-cell-group/u-cell-group",
-    "u-cell-item": "/uview-ui/components/u-cell-item/u-cell-item",
-    "u-input": "/uview-ui/components/u-input/u-input",
-    "u-form-item": "/uview-ui/components/u-form-item/u-form-item",
-    "u-toast": "/uview-ui/components/u-toast/u-toast",
-    "u-verification-code": "/uview-ui/components/u-verification-code/u-verification-code",
-    "u-message-input": "/uview-ui/components/u-message-input/u-message-input"
+    "u-navbar": "/uview-ui_2.0.4/components/u-navbar/u-navbar",
+    "u-button": "/uview-ui_2.0.4/components/u-button/u-button",
+    "u-cell-group": "/uview-ui_2.0.4/components/u-cell-group/u-cell-group",
+    "u-cell": "/uview-ui_2.0.4/components/u-cell/u-cell",
+    "u-input": "/uview-ui_2.0.4/components/u-input/u-input",
+    "u-form-item": "/uview-ui_2.0.4/components/u-form-item/u-form-item",
+    "u-toast": "/uview-ui_2.0.4/components/u-toast/u-toast",
+    "u-code": "/uview-ui_2.0.4/components/u-code/u-code",
+    "u-code-input": "/uview-ui_2.0.4/components/u-code-input/u-code-input"
   }
 }

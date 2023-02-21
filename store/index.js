@@ -2,17 +2,40 @@ import Vue from "vue"
 import Vuex from 'vuex'
 import QQMapWX from "../static/js/qqmap-wx-jssdk.js"
 import {getData} from "../apis"
+// import SockJS from "/static/js/sockjs.min.js"
+// import Stomp from "./static/js/stomp.min.js"
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
 	state:{
-		city:"西安市",
+		street:"行署街",
+		address: "重庆市",
 		lossSearch:[],
-		swiper:[],
+		swiper:[
+			{"pictureUrl" :"https://tse1-mm.cn.bing.net/th/id/OIP-C.nFG8XEG6IsGaK6d1Gm-EcQHaFh?w=250&h=186&c=7&o=5&dpr=1.12&pid=1.7",
+			"name":"褐色钱包", "description":"一个黑色的钱包，里面有现金若干","address":"生活区门口","lossTime":"2022年10月11日17时"
+			},{
+				"pictureUrl" :"https://tse3-mm.cn.bing.net/th/id/OIP-C.SGFn0dvByDXG8j8Dyk_6zwHaHa?w=177&h=180&c=7&o=5&dpr=1.12&pid=1.7",
+				"name":"褐色钱包", "description":"一个黑色的钱包，里面有现金若干","address":"生活区门口","lossTime":"2022年10月11日17时"
+			},{
+				"pictureUrl" :"https://tse1-mm.cn.bing.net/th/id/R-C.b0e35dd43008ac172e8dbe370c475958?rik=8Ox1qs8J2H1ibg&riu=http%3a%2f%2fpic1.ymatou.com%2fG03%2fshangou%2fM09%2f4B%2fE9%2fCgzUIF-6UxqAMOFtAAgFdfbWFFY696_500_667_n_w_o.jpg&ehk=tUMYDzDPvRSHJotf6h3fyTVmDno1SHLSBjC6Y8RhVCE%3d&risl=&pid=ImgRaw&r=0",
+				"name":"褐色钱包", "description":"一个黑色的钱包，里面有现金若干","address":"生活区门口","lossTime":"2022年10月11日17时"
+			}
+		],
 		detailLoss:{},//详情失物数据
 		detailComment:[], //详情评论数据
-		list:[], //全体失物数据
+		list:[
+			{"pictureUrl" :"https://tse1-mm.cn.bing.net/th/id/OIP-C.nFG8XEG6IsGaK6d1Gm-EcQHaFh?w=250&h=186&c=7&o=5&dpr=1.12&pid=1.7",
+			"name":"褐色钱包", "description":"一个黑色的钱包，里面有现金若干","address":"生活区门口","lossTime":"2022年10月11日17时"
+			},{
+				"pictureUrl" :"https://tse3-mm.cn.bing.net/th/id/OIP-C.SGFn0dvByDXG8j8Dyk_6zwHaHa?w=177&h=180&c=7&o=5&dpr=1.12&pid=1.7",
+				"name":"褐色钱包", "description":"一个黑色的钱包，里面有现金若干","address":"生活区门口","lossTime":"2022年10月11日17时"
+			},{
+				"pictureUrl" :"https://tse1-mm.cn.bing.net/th/id/R-C.b0e35dd43008ac172e8dbe370c475958?rik=8Ox1qs8J2H1ibg&riu=http%3a%2f%2fpic1.ymatou.com%2fG03%2fshangou%2fM09%2f4B%2fE9%2fCgzUIF-6UxqAMOFtAAgFdfbWFFY696_500_667_n_w_o.jpg&ehk=tUMYDzDPvRSHJotf6h3fyTVmDno1SHLSBjC6Y8RhVCE%3d&risl=&pid=ImgRaw&r=0",
+				"name":"褐色钱包", "description":"一个黑色的钱包，里面有现金若干","address":"生活区门口","lossTime":"2022年10月11日17时"
+			}], //全体失物数据
+		indexSkeleton: true, //是否展示骨架屏
 		typeLoss:[],  //每种类型的具体数据
 		type:[], //loss页面分类的类型数组
 		likes:[], //详情页面的评论点赞数
@@ -37,12 +60,115 @@ export default new Vuex.Store({
 		latitude: 0,
 		distance: 0, 
 		polyline:[],
+		foundThingList:[],
+		stompClient: null,
+		wsCreateHandler: null,
+		userId: null,
+		ipAddr: "localhost:8888",
+		DEBUG_FLAG: true,
 	},
 	//同步方法
 	mutations: {
+		 connect(state) {
+			 // state.socketTask = Stomp.Stomp.client('ws://localhost:8888/websocket');
+			 // function con() {
+				//  var socket = new SockJS("http://" + state.ipAddr + "/websocket");
+				//  state.stompClient = Stomp.Stomp.over(socket);
+				//  console.log("创建客户端成功");
+				//  state.stompClient.connect({}, function (frame) {
+				//  	console.log("ceshi");
+				//  	this.$store.commit("writeToScreen","connected: " + frame);
+				//  	// stompClient.subscribe('/topic', function (response) {
+				//  	// 	writeToScreen(response.body);
+				//  	// });
+				//  	// stompClient.subscribe("/queue/" + userId + "/topic", function (response) {
+				//  	// 	writeToScreen(response.body);
+				//  	// });
+				//  	//
+				//  	// stompClient.subscribe('/sendToAll', function (response) {
+				//  	// 	writeToScreen("sendToAll:" + response.body);
+				//  	// });
+				 	
+				//  	state.stompClient.subscribe("/exchange/sendToUser/user" + state.userInfo.id, function (response) {
+				//  		console.log(response.body);
+				//  	});
+				//  	}, function (error) {
+				//  		state.wsCreateHandler && clearTimeout(state.wsCreateHandler);
+				//  		state.wsCreateHandler = setTimeout(function () {
+				//  			console.log("重连...");
+				//  			con();
+				//  			console.log("重连完成");
+				//  		}, 1000);
+				//  	}
+				//  )
+			 // }
+			 // con();
+			 console.log("开始连接了");
+			 let SocketTask = uni.connectSocket({　　
+				url: 'ws://localhost:8888/websocket-app',　　//url: 'ws://localhost:8081/socket',
+				method: 'post',
+				success: function(res) {　　　
+					console.log('WebSocket连接创建', res)　　
+				},　　
+				fail: function(err) {
+					uni.showToast({　　　　　　
+						title: '网络异常！',
+					})　　　　
+					console.log(err)
+				},
+			});
+			uni.onSocketOpen(function(res) {
+				console.log('WebSocket连接已打开！');
+				uni.sendSocketMessage({
+					data: "from: 1, to: 2, destination: test",
+					success: (res) =>{
+						console.log("发送cenggong"+res);
+					},
+					fail: (res) =>{
+						console.log("发送失败"+res);
+					}
+				});
+			});
+			uni.onSocketClose(function(res) {
+							console.log('WebSocket 已关闭！');
+			});
+			
+		},
+		writeToScreen(state,message) {
+			console.log("testdsf");
+			if(state.DEBUG_FLAG)
+			{
+				// $("#debuggerInfo").val($("#debuggerInfo").val() + "\n" + message);
+				console.log(message);
+			}
+		},
+		//发送消息
+		WEBSOCKET_SEND (state, data) {
+			state.socketTask.send({
+			   data,
+			   async success() {
+				   console.log('消息发送成功')
+			   },
+		   })
+		 },
+		//关闭连接
+		CLOSE_SOCKET (state) {
+			if (!state.socketTask) return
+			state.socketTask.close({
+				success (res) {
+					console.log('关闭成功', res)
+				},
+				fail (err) {
+					console.log('关闭失败', err)
+				}
+			})
+		},
 		//发布失物
 		submitLoss(state,[time,userid,name,pic,address,type,des]) {
 			console.log("开始传输失物数据");
+			console.log(time)
+			console.log(userid)
+		
 			getData({url:"lost/publoss",data:{"name":name,"pic":pic,"address":address,"type":type,"lossTime":time,"userId":userid,"des":des}}).then(res => {
 				if(res.status == "success") {
 					state.isPub=true;
@@ -64,13 +190,11 @@ export default new Vuex.Store({
 					state.detailComment = res.data;
 					uni.showToast({title:"评论成功",icon:"success"});
 					getData({url:"lcompoment/cnum",data:{"lossId":lossId}}).then(res => {
-						// console.log("评论数量是：" +res.data);
 						if(res.status == "success") {
 							state.commentsNum = res.data;
 						} 
 					});
 				} else {
-					
 					uni.showToast({title:"评论失败",icon:"error"});
 				}
 			})
@@ -87,6 +211,27 @@ export default new Vuex.Store({
 	},
 	//异步方法
 	actions: {
+		connect({commit}) {
+			console.log("开始连接");
+			commit('connect')
+		},
+		WEBSOCKET_SEND({commit}, data) {
+			commit('WEBSOCKET_SEND', data)
+		},
+		CLOSE_SOCKET({commit}) {
+			commit('CLOSE_SOCKET')
+		},
+		getAllFound(context,typeId) {
+			getData({url:'found/founds/' + 1,data: {"typeId": typeId}}).then(res=>{
+				console.log(res);
+				if(res.status == 'success') {
+					console.log(res.data);
+					context.state.foundThingList = context.state.foundThingList.concat(res.data);
+				} else {
+					
+				}
+			})
+		},
 		//获取所有离线消息
 		meshistory(context,id) {
 			getData({url:"mes/offline",data:{"id":id}}).then(res =>{
@@ -142,22 +287,28 @@ export default new Vuex.Store({
 				}
 			})
 		},
+		//登录流程
 		login(context,[code,user]) {
-			console.log(code);
-			console.log(user.nickName);
-			console.log(user.avatarUrl);
-			console.log(user.gender);
+			// console.log(code);
+			// console.log(user.nickName);
+			// console.log(user.avatarUrl);
+			// console.log(user.gender);
 			getData({url:"user/code",header:{"content-type":"application/x-www-form-urlencoded"},method:"POST",data:{"code":code,"nickName":user.nickName,"addressUrl":user.avatarUrl,"sex":user.gender}}).then(res=>{
+				console.log("开始登录")
 				if(res.status == "success") {
 					context.state.userInfo = res.data;
 					context.state.isExpired = true;
 					uni.setStorageSync('token', res.data.token);
 					uni.showToast({title:"登录成功"});
+					console.log("token：");
+					console.log(res.data.token);
 				}else {
+					console.log("登录失败")
 					uni.showToast({title:res.data,icon:"error"});
 				}
 			})
 		},
+		//获取历史消息
 		history(context,[fromid,toid]){
 			getData({url:"mes/history",data:{"fromId":fromid,"toId":toid}}).then(res =>{
 				if(res.status == "success") {
@@ -182,6 +333,7 @@ export default new Vuex.Store({
 				}
 			})
 		},
+		//用户发布的寻物
 		getUserFound(context,id) {
 			console.log(id);
 			getData({url:"found/mpub/" + id}).then(res=>{
@@ -271,10 +423,13 @@ export default new Vuex.Store({
 		submitFound({context},[time,userid,name,pic,address,type,des]) {
 			console.log("开始传输寻物数据");
 			getData({url:"found/pubfound",data:{"name":name,"pic":pic,"address":address,"type":type,"lossTime":time,"userId":userid,"des":des}}).then(res => {
+				console.log("testte")
 				if(res.status == "success") {
 					context.state.isPub=true;
+					console.log("succexs")
 					uni.showToast({title:"寻物发布成功",icon:"success"});
 				} else {
+					console.log("failed")
 					context.state.isPub=false;
 					uni.showToast({title:"寻物发布失败",icon:"error"});
 				}
@@ -293,6 +448,7 @@ export default new Vuex.Store({
 		//根据类型获取数据
 		getLossByType(context,id) {
 			getData({url:"lost/type/"+id}).then(res=>{
+				console.log(res)
 				if(res.status=="success"){
 					context.state.typeLoss = res.data;
 				}else {
@@ -306,9 +462,24 @@ export default new Vuex.Store({
 		getType(context) {
 			getData({url:"type"}).then(res=>{
 				console.log("开始获取所有类型");
-				console.log(res);
+				// console.log(res);
 				if(res.status == "success") {
-					context.state.type=res.data;
+					console.log("获取到所有类型")
+					// context.state.type = res.data
+					context.state.type.push(res.data);
+				} else {
+					context.state.type=[];
+				}
+			})
+		},
+		getType1(context) {
+			getData({url:"type"}).then(res=>{
+				console.log("开始获取所有类型");
+				// console.log(res);
+				if(res.status == "success") {
+					console.log("获取到所有类型")
+					context.state.type = res.data
+					// context.state.type.push(res.data);
 				} else {
 					context.state.type=[];
 				}
@@ -391,8 +562,10 @@ export default new Vuex.Store({
 									longitude: res.longitude
 								},
 								success: (res)=> {
-									context.state.city=res.result.address_component.city;
-									console.log(context.state.city);
+									console.log(res);
+									context.state.street=res.result.address_component.district;
+									context.state.address=res.result.address;
+									console.log(context.state.street);
 								}
 							})
 						}
@@ -473,14 +646,20 @@ export default new Vuex.Store({
 				}
 			})
 		},
+		//获取所有失物信息
 		getAll(context) {
 			getData({url:"lost/list"}).then(res=>{
 				console.log(res);
 				if(res.status=="success"){
 					context.state.list = res.data;
+					context.state.indexSkeleton = false;
 				} else {
 					uni.showToast({title:res.data,icon:"error"});
+					
 				}
+			}).catch(res => {
+				context.state.indexSkeleton = false;
+				uni.showToast({title:"获取物品失败",icon:"error"});
 			});
 			setTimeout(function () {
 			    uni.hideLoading();

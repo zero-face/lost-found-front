@@ -70,6 +70,13 @@
             "sdkConfigs" : {
                 "speech" : {
                     "ifly" : {}
+                },
+                "oauth" : {},
+                "share" : {
+                    "weixin" : {
+                        "appid" : "wx67f16348de469a2c",
+                        "UniversalLinks" : ""
+                    }
                 }
             },
             "orientation" : [ "portrait-primary" ]
@@ -82,7 +89,9 @@
         "appid" : "wx67f16348de469a2c",
         "setting" : {
             "urlCheck" : false,
-            "minified" : true
+            "minified" : true,
+            "es6" : true,
+            "postcss" : true
         },
         "usingComponents" : true,
         "permission" : {
@@ -95,13 +104,13 @@
         "template" : "",
         "router" : {
             "mode" : "hash",
-            "base" : ""
+            "base" : "./"
         },
         "title" : "lost_found",
         "domain" : "zero-face",
         "optimization" : {
             "treeShaking" : {
-                "enable" : true
+                "enable" : false
             }
         },
         "devServer" : {

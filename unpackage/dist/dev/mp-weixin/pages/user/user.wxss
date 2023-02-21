@@ -25,13 +25,15 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
+.content {
+  background-color: #eee;
+  height: 100vh;
+}
 .second {
   margin-top: 20rpx;
   background: #fff;
 }
 .mess {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
   margin-top: 20rpx;
   padding: 20rpx 10rpx 10rpx 100rpx;
@@ -39,8 +41,6 @@
   width: 100%;
 }
 .pub {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
   margin-top: 20rpx;
   padding: 20rpx 0 0 100rpx;
@@ -51,10 +51,6 @@
   height: 20rpx;
   width: 30rpx;
 }
-.content {
-  height: 92.5vh;
-  background: #eee;
-}
 .box {
   background-color: red;
 }
@@ -63,9 +59,8 @@
   height: auto;
   width: 100%;
   padding: 30rpx 0rpx 30rpx 20rpx;
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
+  align-items: center;
 }
 .info .pic {
   line-height: 30rpx;
@@ -75,8 +70,10 @@
   font-size: 30rpx;
   margin-left: 5rpx;
   line-height: 130rpx;
+  width: 50%;
 }
 .info .right {
+  margin-left: auto;
   float: right;
   margin-left: 280rpx;
   width: 20%;
@@ -84,8 +81,6 @@
   height: 100%;
 }
 .renzheng {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
   margin-top: 20rpx;
   background: #fff;

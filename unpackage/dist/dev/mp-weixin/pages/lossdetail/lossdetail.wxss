@@ -25,15 +25,13 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
+.comments {
+  padding-top: 10rpx;
+}
 .content {
-  height: 1000rpx;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: flex;
+  background-color: #F4F4F4;
 }
 .type-1 {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
 }
 .type-1 .image {
@@ -54,24 +52,20 @@
   color: #838383;
 }
 .type-1 .nacom .comment {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
+  height: auto;
+  width: 100%;
   padding-left: 0rpx;
   color: #282828;
+  word-wrap: break-word;
+  white-space: pre-wrap;
 }
 .type-1 .nacom .comment .reply {
   padding-left: 30rpx;
 }
-.type-1 likes {
-  padding-top: 50rpx;
-  width: 400rpx;
-  height: 100%;
-  background: red;
-}
 .type-2 {
-  display: -webkit-box;
-  display: -webkit-flex;
+  width: 100%;
+  height: auto;
   display: flex;
   padding-left: 90rpx;
   margin-top: 20rpx;
@@ -79,7 +73,6 @@
 .type-2 .image {
   margin: 3rpx 10rpx 10rpx 3rpx;
   border-radius: 60%;
-  overflow: hidden;
   height: 70rpx;
   width: 70rpx;
   display: inline-block;
@@ -93,11 +86,13 @@
   color: #838383;
 }
 .type-2 .comment {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
   padding-left: 0rpx;
   color: #282828;
+  width: 90%;
+  height: auto;
+  word-wrap: break-word;
+  white-space: pre-wrap;
 }
 .type-2 .comment .reply {
   padding-left: 30rpx;
@@ -110,48 +105,68 @@
   font-weight: bold;
 }
 .detail {
-  height: 350rpx;
-  border-bottom: 1rpx solid black;
+  background-color: #FFFFFF;
+  height: auto;
+  padding: 10rpx 20rpx 20rpx 20rpx;
 }
 .check {
+  border-top: 1rpx solid #eee;
   background: white;
   position: fixed;
   right: 15rpx;
-  bottom: 0rpx;
+  bottom: 0;
   left: 0rpx;
   width: 100%;
-  height: 80rpx;
+  height: 90rpx;
   z-index: 999;
+  padding: 10rpx 10rpx 10rpx 10rpx;
 }
-.check .comment {
-  background: white;
-  width: 45%;
-  margin: 0 0 20rpx;
-  height: 80rpx;
-  border: 1rpx solid #b8b8b8;
-  border-radius: 60rpx 60rpx 60rpx 60rpx;
-  line-height: 130rpx;
+.check .boleft {
+  width: 77%;
+  display: flex;
+  flex-wrap: wrap;
+  height: 70rpx;
+  justify-content: space-between;
+  float: left;
+  line-height: 80rpx;
+}
+.check .boleft .item {
   text-align: center;
+  width: 70rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  margin-left: 50rpx;
+}
+.check .boleft .input {
+  width: 100%;
+  min-height: 60rpx;
+  background-color: #eee;
+  border-radius: 50rpx;
+  line-height: 60rpx;
+  padding-left: 30rpx;
+  height: 70rpx;
+  max-height: 70rpx;
 }
 .check .contact {
   background: #ffaa00;
   border-radius: 40rpx 0% 0% 40rpx;
   float: right;
-  height: 100%;
+  height: 70rpx;
   width: 25%;
   color: white;
-  line-height: 80rpx;
+  line-height: 70rpx;
   text-align: center;
 }
 .check .verify {
   color: white;
-  line-height: 80rpx;
+  line-height: 70rpx;
   text-align: center;
-  border-radius: 0% 40rpx 40rpx 0%;
+  border-radius: 40rpx;
+  margin-right: 10rpx;
   width: 130rpx;
-  background: #FF0036;
+  background: #0055ff;
   float: right;
-  height: 100%;
-  width: 25%;
+  height: 70rpx;
+  width: 15%;
 }
 

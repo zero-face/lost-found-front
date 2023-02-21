@@ -31,8 +31,6 @@
 }
 .system {
   margin: 10rpx 0 0 10rpx;
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
   background: #fff;
   width: 100%;
@@ -50,8 +48,6 @@
   font-size: 30rpx;
 }
 ._ul {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
   margin: 10rpx 00rpx 10rpx 0rpx;
   background: #fff;

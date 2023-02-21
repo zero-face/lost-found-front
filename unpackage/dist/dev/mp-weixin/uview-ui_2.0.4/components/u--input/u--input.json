@@ -1,0 +1,10 @@
+{
+  "componentGenerics": {
+    "scoped-slots-prefix": true,
+    "scoped-slots-suffix": true
+  },
+  "component": true,
+  "usingComponents": {
+    "uv-input": "/uview-ui_2.0.4/components/u-input/u-input"
+  }
+}

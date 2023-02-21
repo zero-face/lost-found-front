@@ -1,10 +1,11 @@
 {
   "navigationBarTitleText": "我的发布",
   "enablePullDownRefresh": false,
-  "navigationBarBackgroundColor": "#ffaa7f",
+  "navigationBarBackgroundColor": "#ffaaff",
   "usingComponents": {
-    "u-subsection": "/uview-ui/components/u-subsection/u-subsection",
-    "u-image": "/uview-ui/components/u-image/u-image",
-    "u-empty": "/uview-ui/components/u-empty/u-empty"
+    "u-subsection": "/uview-ui_2.0.4/components/u-subsection/u-subsection",
+    "u--image": "/uview-ui_2.0.4/components/u--image/u--image",
+    "u-empty": "/uview-ui_2.0.4/components/u-empty/u-empty",
+    "u-image": "/uview-ui_2.0.4/components/u-image/u-image"
   }
 }

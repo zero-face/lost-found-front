@@ -2,10 +2,14 @@
   "navigationBarTitleText": "Lost&Found",
   "enablePullDownRefresh": false,
   "usingComponents": {
-    "u-image": "/uview-ui/components/u-image/u-image",
-    "u-icon": "/uview-ui/components/u-icon/u-icon",
-    "u-search": "/uview-ui/components/u-search/u-search",
-    "u-empty": "/uview-ui/components/u-empty/u-empty",
-    "u-divider": "/uview-ui/components/u-divider/u-divider"
+    "u-gap": "/uview-ui_2.0.4/components/u-gap/u-gap",
+    "u-icon": "/uview-ui_2.0.4/components/u-icon/u-icon",
+    "u-search": "/uview-ui_2.0.4/components/u-search/u-search",
+    "u-popup": "/uview-ui_2.0.4/components/u-popup/u-popup",
+    "u--text": "/uview-ui_2.0.4/components/u--text/u--text",
+    "u-empty": "/uview-ui_2.0.4/components/u-empty/u-empty",
+    "u-skeleton": "/uview-ui_2.0.4/components/u-skeleton/u-skeleton",
+    "u-image": "/uview-ui_2.0.4/components/u-image/u-image",
+    "u-divider": "/uview-ui_2.0.4/components/u-divider/u-divider"
   }
 }

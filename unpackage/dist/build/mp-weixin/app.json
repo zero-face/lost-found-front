@@ -3,7 +3,6 @@
     "pages/index/index",
     "pages/foud/foud",
     "pages/user/user",
-    "pages/community/community",
     "pages/lossdetail/lossdetail",
     "pages/contact/contact",
     "pages/publish/publish",
@@ -11,7 +10,9 @@
     "pages/auth/auth",
     "pages/userUpdate/userUpdate",
     "pages/mesDetail/mesDetail",
-    "pages/myPub/myPub"
+    "pages/myPub/myPub",
+    "pages/serviceCenter/serviceCenter",
+    "pages/claimLocation/claimLocation"
   ],
   "subPackages": [],
   "window": {
@@ -39,24 +40,17 @@
         "text": "寻物"
       },
       {
-        "pagePath": "pages/publish/publish",
-        "iconPath": "static/add.png",
-        "selectedIconPath": "static/add.png",
-        "text": "发布"
-      },
-      {
-        "pagePath": "pages/community/community",
-        "iconPath": "static/communicate.png",
-        "selectedIconPath": "static/communicate.png",
-        "text": "感谢墙"
-      },
-      {
         "pagePath": "pages/user/user",
         "iconPath": "static/userInfo.png",
         "selectedIconPath": "static/userInfo.png",
         "text": "个人中心"
       }
     ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "获取您的当前位置"
+    }
   },
   "usingComponents": {}
 }
